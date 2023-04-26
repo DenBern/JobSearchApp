@@ -6,11 +6,12 @@ import { SuperJob } from "../../service/SuperJob";
 import "./App.css";
 
 export const App = () => {
-    const {getAccessToken, getCatalogues} = SuperJob();
+    const {getAccessToken, getCatalogues, getVacancies} = SuperJob();
     
     useEffect(() => {
         getAccessToken();
         getCatalogues();
+        getVacancies();
     }, [])
     
     return (
