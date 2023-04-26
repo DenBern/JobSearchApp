@@ -1,0 +1,14 @@
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+.filters {
+    width: 315px;
+    height: 360px;
+    background-color: blue;
+}
+
+.search-content {
+    width: 60%;
+}
