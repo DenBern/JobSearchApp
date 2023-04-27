@@ -21,7 +21,7 @@ export const SuperJob = () => {
         }
         return await response.json();
     };
-    
+
     const getAccessToken = async () => {
         const response = 
             await getData(`${URL}${urlPassword}${credits.login}
@@ -49,6 +49,5 @@ export const SuperJob = () => {
         return catalogues;
     };
     
-    return { getAccessToken, getVacancies, getCatalogues};
-    
+    return {getAccessToken, getCatalogues, getVacancies}
 }
