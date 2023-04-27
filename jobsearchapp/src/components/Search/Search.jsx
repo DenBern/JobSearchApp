@@ -4,7 +4,7 @@ import { IconSearch, IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 
 export const Search = () => {
     const theme = useMantineTheme();
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState('');
 
     return (
         <TextInput
