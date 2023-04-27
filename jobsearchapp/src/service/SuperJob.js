@@ -1,10 +1,9 @@
 export const SuperJob = () => {
 
-    const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
-    const urlPassword = '/oauth2/password/?';
-    const urlVacancies = '/vacancies/'; 
-    const urlCatalogues = '/catalogues/';
-
+    const URL = 'https://startup-summer-2023-proxy.onrender.com';
+    const urlPassword = '/2.0/oauth2/password/?';
+    const urlVacancies = '/2.0/vacancies/'; 
+    const urlCatalogues = '/2.0/catalogues/';
 
     const options = {
         login: 'login=sergei.stralenia@gmail.com',
@@ -16,38 +15,38 @@ export const SuperJob = () => {
 
     const getData = async (url, headers = {}) => {
         const response = await fetch(url, headers);
-    
+
         if (!response.ok) {
             throw new Error(`url - ${url}, status: ${response.status}`);
         }
         return await response.json();
     };
-    
+
     const getAccessToken = async () => {
-        const response = await getData(`${URL}${urlPassword}${options.login}&${options.password}&${options.client_id}&${options.client_secret}&${options.hr}`);
-        console.log(response.access_token)
+        const response = await getData(`${URL}${urlPassword}${options.login}
+            &${options.password}
+            &${options.client_id}
+            &${options.client_secret}
+            &${options.hr}`
+        );
         return response.access_token;
     };
-    
-    const getVacancies = async () => {
-        const token = await getAccessToken();
-        
-        const vacancies = await getData(`${URL}${urlVacancies}`, {
-            headers: {
-                'authorization': `Bearer ${token}`,
-                'X-Api-App-Id': 'GEU4nvd3rej*jeh.eqp',
-            }
-        });
-        console.log(vacancies)
-        return vacancies;
-    };
-    
+
     const getCatalogues = async () => {
         const catalogues = await getData(`${URL}${urlCatalogues}`);
         console.log(catalogues)
         return catalogues;
     };
     
-    return { getAccessToken, getVacancies, getCatalogues};
+    const getVacancies = async () => {
+        const token = await getAccessToken();
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'X-Api-App-Id': 'GEU4nvd3rej*jeh.eqp',
+        }
+        const vacancies = await getData(`${URL}${urlVacancies}`, {headers});
+        return vacancies;
+    };
     
+    return {getAccessToken, getCatalogues, getVacancies}
 }
