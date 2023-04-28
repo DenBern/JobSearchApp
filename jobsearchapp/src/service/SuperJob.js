@@ -9,8 +9,8 @@ export const SuperJob = () => {
     const credits = {
         login: 'login=sergei.stralenia@gmail.com',
         password: 'password=paralect123',
-        client_id: 'client_id=2231',
-        client_secret: 'client_secret=v3.r.137440105.399b9c5f19384345afe0ad0339e619e71c66af1d.800f8642a38256679e908c370c44267f705c2909',
+        client_id: 'client_id=2356',
+        client_secret: 'client_secret=v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
         hr: 'hr=0',
     };
 
@@ -33,8 +33,8 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${response.access_token}`)
     };
     
-    const getVacancies = async () => {
-        const vacancies = await getData(`${URL}${urlVacancies}published=1&keyword="учитель"`, {
+    const getVacancies = async (keyword = "учитель", paymentFrom = 0, paymentTo, catalogues = 33) => {
+        const vacancies = await getData(`${URL}${urlVacancies}published=1&keyword=${keyword}&payment_from=${paymentFrom}&payment_to=${paymentTo}$catalogues=${catalogues}`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
                 'x-secret-key': 'GEU4nvd3rej*jeh.eqp',

@@ -7,7 +7,7 @@ import { SuperJob } from "../../service/SuperJob";
 
 export const App = () => {
 
-    const {getAccessToken} = SuperJob();
+    const {getAccessToken, getVacancies, getCatalogues} = SuperJob();
 
     useEffect(() => {
         getAccessToken();
