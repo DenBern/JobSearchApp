@@ -17,19 +17,11 @@ export const App = () => {
     const vacanciesOnThePage = 4;
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit ? Math.ceil(countVacancies / vacanciesOnThePage) : Math.ceil(maxAPILimit / vacanciesOnThePage) 
-    console.log(pages)
+
     useEffect(() => {
-        // getAccessToken()
+        getAccessToken()
         getCatalogues()
     }, [])
-
-    // useEffect(() => {
-    //     if (vacancy === '') {
-    //         return
-    //     } else {
-    //         setPage(1)
-    //     }
-    // }, [vacancy])
 
     useEffect(() => {
         if (vacancy !== '') {
