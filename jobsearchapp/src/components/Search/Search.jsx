@@ -1,32 +1,21 @@
 import { useState } from 'react';
-import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
-import { IconSearch, IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 
-export const Search = () => {
-    const theme = useMantineTheme();
+export const Search = (props) => {
+    const {updateVacancy} = props;
     const [search, setSearch] = useState('');
 
     return (
-        <TextInput
-            icon={<IconSearch size="1.1rem" stroke={1.5} />}
-            radius="xl"
-            size="md"
-            rightSection={
-                <ActionIcon 
-                    size={32} radius="xl" 
-                    color={theme.primaryColor} 
-                    variant="filled">
-                    {theme.dir === 'ltr' ? (
-                        <IconArrowRight size="1.1rem" stroke={1.5} />
-                    ) : (
-                        <IconArrowLeft size="1.1rem" stroke={1.5} />
-                    )}
-                </ActionIcon>
-            }
-            placeholder="Введите название вакансии"
-            rightSectionWidth={42}
+    <div style={{display: "flex", flexDirection: "row", gap: "1vw"}}>
+        <input 
+            type="text"
+            placeholder="Search vacancy"
             value={search}
             onChange={e => setSearch(e.target.value)}
         />
+        <button
+            style={{backgroundColor: "green"}}
+            onClick={() => updateVacancy(search)}
+        >Start search</button>
+    </div>
     );
 }

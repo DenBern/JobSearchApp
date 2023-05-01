@@ -1,14 +1,47 @@
 main {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .filters {
     width: 315px;
     height: 360px;
-    background-color: blue;
 }
 
 .search-content {
     width: 60%;
+}
+
+.pagination {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+li {
+    cursor: pointer;
+    list-style: none;
+}
+
+a {
+    padding:  2px 6px;
+}
+.selected {
+    background-color: #5E96FC;
+    color: #eee;
+    border-radius: 3px;
+}
+    
+.disabled {
+    color: #808080;
+}
+    
+a .selected {
+    color: #eee;
+}
+
+select {
+    width: 100%;
 }
