@@ -43,13 +43,13 @@ export const SuperJob = () => {
         localStorage.setItem('token', `${token.access_token}`)
     };
 
-    const getVacancies = async (keyword, paymentFrom, paymentTo, catalogues = 33, page = 1) => {
+    const getVacancies = async (keyword, paymentFrom, paymentTo, catalogues = 33, countPerPage = 4, page = 1) => {
         getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
             &payment_from=${paymentFrom}
             &payment_to=${paymentTo}
             &catalogues=${catalogues}
-            &count=4,
+            &count=${countPerPage},
             &page=${page}`,
                 {
                     headers: {
@@ -60,6 +60,7 @@ export const SuperJob = () => {
                 }
         )
         .then(vacancies => {
+            console.log(vacancies)
                 setVacancies([...vacancies.objects])
                 setCountVacancies(vacancies.total)
             }

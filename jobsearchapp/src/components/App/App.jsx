@@ -15,27 +15,27 @@ export const App = () => {
     const {getAccessToken, getVacancies, vacancies, countVacancies, getCatalogues, catalogues} = SuperJob();
 
     const vacanciesOnThePage = 4;
-    const pages = Math.ceil(countVacancies / vacanciesOnThePage);
-
+    const maxAPILimit = 500;
+    const pages = countVacancies <= maxAPILimit ? Math.ceil(countVacancies / vacanciesOnThePage) : Math.ceil(maxAPILimit / vacanciesOnThePage) 
+    console.log(pages)
     useEffect(() => {
+        // getAccessToken()
         getCatalogues()
     }, [])
 
-    useEffect(() => {
-        if (vacancy === '') {
-            return
-        } else {
-            setPage(1)
-        }
-    }, [vacancy])
+    // useEffect(() => {
+    //     if (vacancy === '') {
+    //         return
+    //     } else {
+    //         setPage(1)
+    //     }
+    // }, [vacancy])
 
     useEffect(() => {
-        if (vacancy === '' & page === 1) {
-            return
-        } else if (vacancy !== '' & page >= 1) {
-            getVacancies(vacancy, 0, 99999999, catalog, page)
+        if (vacancy !== '') {
+            getVacancies(vacancy, 0, 99999999, catalog, vacanciesOnThePage, page)
         }
-    }, [page])
+    }, [page, vacancy])
 
     return (
         <>
@@ -55,7 +55,7 @@ export const App = () => {
                     </label>
                 </div>
                 <div className="search-content">
-                    <Search updateVacancy={(search) => setVacancy(search)}/>
+                    <Search updateVacancy={(search) => setVacancy(search)} updatePage={setPage}/>
                     <div className="vacancies"
                         style={
                             {
@@ -66,18 +66,24 @@ export const App = () => {
                         }>
                         {vacancies.map(vacancy => <Vacancy key={vacancy.id}  {...vacancy}/>)}
                     </div>
-                    <ReactPaginate
-                        className="pagination"
-                        breakLabel="..."
-                        nextLabel=" >"
-                        previousLabel="< "
-                        pageCount={pages}
-                        renderOnZeroPageCount={null}
-                        onPageChange={(e) => setPage(e.selected + 1)}
-                        pageRangeDisplayed={2}
-                        marginPagesDisplayed={1}
-                        forcePage={page - 1}
-                    />
+                    {vacancies.length > 0 && 
+                        (
+                            <ReactPaginate
+                                className="pagination"
+                                breakLabel="..."
+                                nextLabel=" >"
+                                previousLabel="< "
+                                pageCount={pages - 1}
+                                renderOnZeroPageCount={null}
+                                onPageChange={(e) => setPage(e.selected + 1)}
+                                pageRangeDisplayed={2}
+                                marginPagesDisplayed={2}
+                                forcePage={page - 1}
+                                initialPage={0}
+                            />
+                        )
+                    }
+                    
                 </div>
             </main>
         </>

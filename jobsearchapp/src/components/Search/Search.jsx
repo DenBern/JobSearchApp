@@ -1,8 +1,13 @@
 import { useState } from 'react';
 
 export const Search = (props) => {
-    const {updateVacancy} = props;
+    const {updateVacancy, updatePage} = props;
     const [search, setSearch] = useState('');
+
+    const handlesearch = () => {
+        updatePage(1)
+        updateVacancy(search)
+    }
 
     return (
     <div style={{display: "flex", flexDirection: "row", gap: "1vw"}}>
@@ -14,7 +19,7 @@ export const Search = (props) => {
         />
         <button
             style={{backgroundColor: "green"}}
-            onClick={() => updateVacancy(search)}
+            onClick={handlesearch}
         >Start search</button>
     </div>
     );
