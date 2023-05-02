@@ -59,7 +59,6 @@ export const SuperJob = () => {
                 }
         )
         .then(vacancies => {
-            console.log(vacancies)
                 setVacancies([...vacancies.objects])
                 setCountVacancies(vacancies.total)
             }

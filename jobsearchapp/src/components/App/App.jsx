@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Search } from "../Search/Search";
 import { Header } from "../Header/Header";
 import { Vacancy } from "../Vacancy/Vacancy";
+
+import { Select } from "@mantine/core";
+import { NumberInput } from '@mantine/core';
 
 import ReactPaginate from "react-paginate";
 
@@ -23,8 +26,8 @@ export const App = () => {
     const pages = countVacancies <= maxAPILimit ? Math.ceil(countVacancies / vacanciesOnThePage) : Math.ceil(maxAPILimit / vacanciesOnThePage) 
 
     useEffect(() => {
-        getAccessToken()
-        getCatalogues()
+        getAccessToken();
+        getCatalogues();
     }, [])
 
     useEffect(() => {
@@ -35,6 +38,7 @@ export const App = () => {
 
     const submitFilters = (e) => {
         e.preventDefault();
+        if (vacancy === '') return 
         page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalog, vacanciesOnThePage, page) : setPage(1)
     }
 
@@ -44,10 +48,31 @@ export const App = () => {
             <main>
                 <div className="filters">
                 <form action="https://api.superjob.ru/2.0/vacancies/" method="GET">
-                    <input type="number" name="payment_from" onChange={(e) => setPaymentFrom(e.target.value)}/>
-                    <input type="number" name="payment_to" onChange={(e) => setPaymentTo(e.target.value)}/>
-                    <label>отрасль
-                    <select onChange={event => setCatalog(event.target.value)}>
+                    <Select
+                        data={catalogues.map(catalog => catalog.title_rus)}
+                        placeholder="Выберете отрасль"
+                        label="Отрасль"
+                        radius="md"
+                        size="md"
+                        limit={2}
+                    />
+                    <label>Оклад
+                        <NumberInput
+                            type="number"
+                            placeholder="От"
+                            min={0}
+                            max={paymentTo}
+                            onChange={value => setPaymentFrom(value)}
+                        />
+                        <NumberInput
+                            type="number"
+                            placeholder="До"
+                            min={paymentFrom}
+                            onChange={value => setPaymentTo(value)}
+                        />
+                    </label>
+
+                    {/* <select onChange={event => setCatalog(event.target.value)}>
                         {catalogues.map(catalog => 
                             <option 
                                 key={catalog.key}
@@ -56,9 +81,11 @@ export const App = () => {
                             </option>
                         )}
                     </select>
-                    </label>
+                    <input type="number" name="payment_to" onChange={(e) => setPaymentTo(e.target.value)}/>
+                    <input type="number" name="payment_from" onChange={(e) => setPaymentFrom(e.target.value)}/> */}
                     <button type="submit" onClick={submitFilters}>Искать</button>
-                    </form>
+                </form>
+
                 </div>
                 <div className="search-content">
                     <Search updateVacancy={(search) => setVacancy(search)} updatePage={setPage}/>
