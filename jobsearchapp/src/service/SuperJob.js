@@ -42,13 +42,13 @@ export const SuperJob = () => {
         localStorage.setItem('token', `${token.access_token}`)
     };
 
-    const getVacancies = async (keyword, paymentFrom, paymentTo, catalogues = 33, countPerPage = 4, page = 1) => {
+    const getVacancies = async (keyword, paymentFrom, paymentTo = 9999999999999, catalogues = 0, countPerPage = 4, page = 1) => {
         getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
             &payment_from=${paymentFrom}
             &payment_to=${paymentTo}
             &catalogues=${catalogues}
-            &count=${countPerPage},
+            &count=${countPerPage}
             &page=${page}`,
                 {
                     headers: {
@@ -69,7 +69,7 @@ export const SuperJob = () => {
     const getCatalogues = async () => {
         await getData(`${URL}${urlCatalogues}`, {
             headers: {
-                'Authorization': `Bearer ${tokenSave}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
                 'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
             }

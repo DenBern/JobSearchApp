@@ -11,7 +11,11 @@ import "./App.css";
 export const App = () => {
     const [vacancy, setVacancy] = useState('');
     const [page, setPage] = useState(0);
-    const [catalog, setCatalog] = useState(1);
+    const [catalog, setCatalog] = useState(0);
+
+    const [paymentFrom, setPaymentFrom] = useState(0);
+    const [paymentTo, setPaymentTo] = useState();
+
     const {getAccessToken, getVacancies, vacancies, countVacancies, getCatalogues, catalogues} = SuperJob();
 
     const vacanciesOnThePage = 4;
@@ -25,26 +29,36 @@ export const App = () => {
 
     useEffect(() => {
         if (vacancy !== '') {
-            getVacancies(vacancy, 0, 99999999, catalog, vacanciesOnThePage, page)
+            getVacancies(vacancy, paymentFrom , paymentTo, catalog, vacanciesOnThePage, page)
         }
     }, [page, vacancy])
+
+    const submitFilters = (e) => {
+        e.preventDefault();
+        page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalog, vacanciesOnThePage, page) : setPage(1)
+    }
 
     return (
         <>
             <Header/>
             <main>
                 <div className="filters">
+                <form action="https://api.superjob.ru/2.0/vacancies/" method="GET">
+                    <input type="number" name="payment_from" onChange={(e) => setPaymentFrom(e.target.value)}/>
+                    <input type="number" name="payment_to" onChange={(e) => setPaymentTo(e.target.value)}/>
                     <label>отрасль
                     <select onChange={event => setCatalog(event.target.value)}>
                         {catalogues.map(catalog => 
                             <option 
                                 key={catalog.key}
-                                value={catalog.title_rus}>
+                                value={catalog.key}>
                                 {catalog.title_rus}
                             </option>
                         )}
                     </select>
                     </label>
+                    <button type="submit" onClick={submitFilters}>Искать</button>
+                    </form>
                 </div>
                 <div className="search-content">
                     <Search updateVacancy={(search) => setVacancy(search)} updatePage={setPage}/>
@@ -69,7 +83,7 @@ export const App = () => {
                                 renderOnZeroPageCount={null}
                                 onPageChange={(e) => setPage(e.selected + 1)}
                                 pageRangeDisplayed={2}
-                                marginPagesDisplayed={2}
+                                marginPagesDisplayed={1}
                                 forcePage={page - 1}
                                 initialPage={0}
                             />
