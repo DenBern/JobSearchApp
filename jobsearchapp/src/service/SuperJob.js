@@ -10,6 +10,8 @@ export const SuperJob = () => {
     const urlPassword = '/oauth2/password/?';
     const urlVacancies = '/vacancies/?'; 
     const urlCatalogues = '/catalogues/';
+    
+    // eslint-disable-next-line no-unused-vars
     const tokenSave = 'v3.r.137440105.23922774053d2681b240701d58f9117a3eb040dd.1d6c5fe4f7ee80884e089f319af0d45e1c74b4be';
 
     const credits = {

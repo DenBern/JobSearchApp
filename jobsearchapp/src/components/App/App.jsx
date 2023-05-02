@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Search } from "../Search/Search";
 import { Header } from "../Header/Header";
@@ -6,6 +7,8 @@ import { Vacancy } from "../Vacancy/Vacancy";
 
 import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
+import { Button } from '@mantine/core';
+
 
 import ReactPaginate from "react-paginate";
 
@@ -14,7 +17,7 @@ import "./App.css";
 export const App = () => {
     const [vacancy, setVacancy] = useState('');
     const [page, setPage] = useState(0);
-    const [catalog, setCatalog] = useState(0);
+    const [catalog] = useState(0);
 
     const [paymentFrom, setPaymentFrom] = useState(0);
     const [paymentTo, setPaymentTo] = useState();
@@ -83,9 +86,11 @@ export const App = () => {
                     </select>
                     <input type="number" name="payment_to" onChange={(e) => setPaymentTo(e.target.value)}/>
                     <input type="number" name="payment_from" onChange={(e) => setPaymentFrom(e.target.value)}/> */}
-                    <button type="submit" onClick={submitFilters}>Искать</button>
+                    <Button
+                        onClick={submitFilters}>
+                        Применить
+                    </Button>
                 </form>
-
                 </div>
                 <div className="search-content">
                     <Search updateVacancy={(search) => setVacancy(search)} updatePage={setPage}/>
@@ -122,3 +127,4 @@ export const App = () => {
         </>
     )
 }
+
