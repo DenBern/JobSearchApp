@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import favorite from '../../assets/png/Save_Button.png';
 export const Vacancy = (props) => {
-    const {profession, payment_from, payment_to, type_of_work, town} = props;
+    const {profession, payment_from, payment_to, type_of_work, town, id} = props;
 
     return (
         <>
@@ -16,7 +17,11 @@ export const Vacancy = (props) => {
                             display: 'flex', flexDirection: 'column'
                         }
                     }>
-                    <div className="name">{profession}</div>
+                    <div className="name">
+                        <Link to={`/${id}`} key={id}>
+                            {profession}
+                        </Link>
+                    </div>
                     <div className="wrapper"
                         style={
                             {

@@ -3,6 +3,7 @@ import { useState } from "react";
 export const SuperJob = () => {
 
     const [vacancies, setVacancies] = useState([]);
+    const [vacancyDetails, setVacancyDetails] = useState()
     const [countVacancies, setCountVacancies] = useState(0);
     const [catalogues, setCatalogues] = useState([])
 
@@ -10,6 +11,7 @@ export const SuperJob = () => {
     const urlPassword = '/oauth2/password/?';
     const urlVacancies = '/vacancies/?'; 
     const urlCatalogues = '/catalogues/';
+    const urlVacancy = '/vacancies/'
     
     // eslint-disable-next-line no-unused-vars
     const tokenSave = 'v3.r.137440105.23922774053d2681b240701d58f9117a3eb040dd.1d6c5fe4f7ee80884e089f319af0d45e1c74b4be';
@@ -67,17 +69,31 @@ export const SuperJob = () => {
         )
     };
 
-    const getCatalogues = async () => {
-        await getData(`${URL}${urlCatalogues}`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-                'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+    const getVacancyDetails = (id) => {
+        getData(`${URL}${urlVacancy}${id}/`, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+                    'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+                }
             }
-        }
+        )
+        .then(vacancy => setVacancyDetails(vacancy.vacancyRichText))
+    }
+
+    const getCatalogues = async () => {
+        await getData(`${URL}${urlCatalogues}`, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+                    'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+                }
+            }
         )
         .then(catalogues => setCatalogues([...catalogues]))
     };
 
-    return {getAccessToken, getCatalogues, getVacancies, vacancies, countVacancies, catalogues}
+    return {getAccessToken, getCatalogues, getVacancies, getVacancyDetails, vacancyDetails, vacancies, countVacancies, catalogues}
 }
