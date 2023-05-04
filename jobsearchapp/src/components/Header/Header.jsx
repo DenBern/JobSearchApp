@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom"
+
 export const Header = () => {
   return (
     <div 
@@ -14,8 +16,12 @@ export const Header = () => {
       }
     >
       <div>img</div>
-      <div>Vacancies</div>
-      <div>Favorite</div>
+      <div>
+        <NavLink style={({isActive}) => ({color: isActive ? '#5E96FC' : '#000', textDecoration: 'none'})} to="/" >Vacancies</NavLink>
+      </div>
+      <div>
+        <NavLink style={({isActive}) => ({color: isActive ? '#5E96FC' : '#000', textDecoration: 'none'})} to="/favorite">Favorite</NavLink>
+      </div>
     </div>
   )
 }
