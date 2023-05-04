@@ -5,18 +5,19 @@ import { useEffect } from "react";
 export const VacancyDetails = () => {
   const {id} = useParams();
 
-  const {getVacancyDetails, vacancyDetails} = SuperJob();
+  console.log(id)
+
+  const {getVacancyDetails, vacancyDetails, vacancies} = SuperJob();
 
   useEffect(() => {
     getVacancyDetails(id)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
   return (
     <>
-      <span>{id}</span>
-      <p>{vacancyDetails}</p>
+      {vacancies.filter(vacancy => vacancy.id = id)}
+      <div dangerouslySetInnerHTML={{ __html: `${vacancyDetails}` }}></div>
     </>
   )
 }
