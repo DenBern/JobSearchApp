@@ -44,7 +44,7 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`)
     };
 
-    const getVacancies = async (keyword, paymentFrom, paymentTo = 9999999999999, catalogues = 0, countPerPage = 4, page = 1) => {
+    const getVacancies = async (keyword, paymentFrom, paymentTo = 9999999999999, catalogues = 33, countPerPage = 4, page) => {
         await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
             &payment_from=${paymentFrom}
@@ -64,10 +64,7 @@ export const SuperJob = () => {
             setVacancies([...vacancies.objects])
             setCountVacancies(vacancies.total)
         })
-        
-    };
-
-    console.log(vacancies)
+    }
 
     const getVacancyDetails = async (id) => {
         await getData(`${URL}${urlVacancy}${id}/`, 
@@ -95,5 +92,6 @@ export const SuperJob = () => {
         .then(catalogues => setCatalogues([...catalogues]))
     };
 
+    console.log(catalogues)
     return {getAccessToken, getCatalogues, getVacancies, getVacancyDetails, vacancyDetails, vacancies, countVacancies, catalogues}
 }

@@ -1,9 +1,9 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import { Header } from '../Header/Header';
-import { Main } from '../pages/Main';
-import { VacancyDetails } from '../pages/VacancyDetails';
-import { Favorites } from '../pages/Favorites';
+import { Main } from '../pages/Main/Main';
+import { VacancyDetails } from '../pages/VacancyDetails/VacancyDetails';
+import { Favorites } from '../pages/Favorites/Favorites';
 import "./App.css";
 
 export const App = () => {

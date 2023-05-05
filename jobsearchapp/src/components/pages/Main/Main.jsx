@@ -1,7 +1,7 @@
 import {useEffect, useState } from "react";
-import { SuperJob } from "../../service/SuperJob";
-import { Search } from "../Search/Search";
-import { Vacancy } from "../Vacancy/Vacancy";
+import { SuperJob } from "../../../service/SuperJob";
+import { Search } from "../../Search/Search";
+import { Vacancy } from "../../Vacancy/Vacancy";
 
 import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
@@ -10,8 +10,8 @@ import ReactPaginate from "react-paginate";
 
 export const Main = () => {
     const [vacancy, setVacancy] = useState('');
-    const [page, setPage] = useState(0);
-    const [catalog] = useState(0);
+    const [page, setPage] = useState(1);
+    const [catalogValue, setCatalogValue] = useState(33);
     const [searchOn, setSearchOn] = useState(false);
 
     const [paymentFrom, setPaymentFrom] = useState(0);
@@ -30,27 +30,20 @@ export const Main = () => {
     }, [])
 
     useEffect(() => {
-        if (vacancy !== '') {
-            getVacancies(vacancy, paymentFrom , paymentTo, catalog, vacanciesOnThePage, page)
-            setSearchOn(true)
-        }
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page)
+        setSearchOn(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, vacancy])
+    }, [vacancy, page])
 
     const submitFilters = (e) => {
         e.preventDefault();
-        if (vacancy === '') return 
-        if (page === 1) { 
-            getVacancies(vacancy, paymentFrom , paymentTo, catalog, vacanciesOnThePage, page)
-        } else {
-            setPage(1)
-        }
+        page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(1)
     }
 
     return (
         <main>
             <div className="filters">
-            <form action="https://api.superjob.ru/2.0/vacancies/" method="GET">
+            <form>
                 <Select
                     data={catalogues.map(catalog => catalog.title_rus)}
                     placeholder="Выберете отрасль"
@@ -59,6 +52,15 @@ export const Main = () => {
                     size="md"
                     limit={2}
                 />
+                {/* <select onChange={event => setCatalogValue(event.target.value)}>
+                        {catalogues.map(catalog => 
+                            <option 
+                                key={catalog.key}
+                                value={catalog.key}>
+                                {catalog.title_rus}
+                            </option>
+                        )}
+                    </select> */}
                 <label>Оклад
                     <NumberInput
                         type="number"
@@ -75,7 +77,7 @@ export const Main = () => {
                     />
                 </label>
                 <Button
-                    style={{backgroundColor: searchOn ? '#228be6' : '#228be64d'}}
+                    // style={{backgroundColor: searchOn ? '#228be6' : '#228be64d'}}
                     onClick={submitFilters}>
                     Применить
                 </Button>

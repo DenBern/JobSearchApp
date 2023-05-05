@@ -1,4 +1,4 @@
-import { Vacancy } from "../Vacancy/Vacancy";
+import { Vacancy } from "../../Vacancy/Vacancy";
 
 export const Favorites = () => {
 
@@ -14,13 +14,13 @@ export const Favorites = () => {
   return (
     <>
       <div className="vacancies"
-                    style={
-                        {
-                            display: 'flex', 
-                            flexDirection: 'column', 
-                            gap: '15px'
-                        }
-                    }>
+        style={
+            {
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '15px'
+            }
+        }>
       {favorites.map(favorite => <Vacancy key={favorite.id} {...favorite}/>)}
       </div>
     </>
