@@ -3,7 +3,7 @@ import { useState } from "react";
 export const SuperJob = () => {
 
     const [vacancies, setVacancies] = useState([]);
-    const [vacancyDetails, setVacancyDetails] = useState([])
+    const [vacancyDetails, setVacancyDetails] = useState()
     const [countVacancies, setCountVacancies] = useState(0);
     const [catalogues, setCatalogues] = useState([])
 
@@ -45,7 +45,7 @@ export const SuperJob = () => {
     };
 
     const getVacancies = async (keyword, paymentFrom, paymentTo = 9999999999999, catalogues = 0, countPerPage = 4, page = 1) => {
-        getData(`${URL}${urlVacancies}published=1
+        await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
             &payment_from=${paymentFrom}
             &payment_to=${paymentTo}
@@ -61,14 +61,16 @@ export const SuperJob = () => {
                 }
         )
         .then(vacancies => {
-                setVacancies([...vacancies.objects])
-                setCountVacancies(vacancies.total)
-            }
-        )
+            setVacancies([...vacancies.objects])
+            setCountVacancies(vacancies.total)
+        })
+        
     };
 
-    const getVacancyDetails = (id) => {
-        getData(`${URL}${urlVacancy}${id}/`, 
+    console.log(vacancies)
+
+    const getVacancyDetails = async (id) => {
+        await getData(`${URL}${urlVacancy}${id}/`, 
             {
                 headers: {
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
@@ -77,10 +79,10 @@ export const SuperJob = () => {
                 }
             }
         )
-        .then(vacancy => setVacancyDetails(vacancy.vacancyRichText))
+        .then(vacancy => setVacancyDetails(vacancy))
     }
 
-    const getCatalogues = () => async () => {
+    const getCatalogues = async () => {
         await getData(`${URL}${urlCatalogues}`, 
             {
                 headers: {

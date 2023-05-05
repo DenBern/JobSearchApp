@@ -3,20 +3,26 @@ import { Link } from 'react-router-dom';
 import favorite from '../../assets/png/Save_Button.png';
 
 export const Vacancy = (props) => {
-    const {profession, payment_from, payment_to, type_of_work, town, id} = props;
+    const {
+        profession, 
+        payment_from, 
+        payment_to, 
+        type_of_work, 
+        town, 
+        id} = props;
 
     const [isFavorite, setIsFavorite] = useState(false);
 
-    const handleAddToFavorite = () => {
+    const addToFavorite = () => {
         setIsFavorite(true);
 
         const favoriteVacancy = {
-        profession,
-        payment_from,
-        payment_to,
-        type_of_work,
-        town,
-        id,
+            profession,
+            payment_from,
+            payment_to,
+            type_of_work,
+            town,
+            id,
         };
 
         localStorage.setItem(`${id}`, JSON.stringify(favoriteVacancy));
@@ -24,7 +30,6 @@ export const Vacancy = (props) => {
 
     return (
         <>
-            
             <div className="base"
                 style={
                     {
@@ -74,7 +79,7 @@ export const Vacancy = (props) => {
                             backgroundColor: 'inherit'
                         }
                     }
-                    onClick={handleAddToFavorite}
+                    onClick={addToFavorite}
                     >
                 </button>
             </div>

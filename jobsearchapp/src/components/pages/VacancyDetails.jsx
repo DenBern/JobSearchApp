@@ -1,19 +1,22 @@
 import { useParams } from "react-router-dom"
-import { SuperJob } from "../../service/SuperJob";
 import { useEffect } from "react";
+import { SuperJob } from "../../service/SuperJob";
+import { Vacancy } from "../Vacancy/Vacancy";
 
-export const VacancyDetails = (props) => {
+export const VacancyDetails = () => {
   const {getVacancyDetails, vacancyDetails} = SuperJob();
   const {id} = useParams();
-
+  
   useEffect(() => {
     getVacancyDetails(id)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+  
+  console.log(vacancyDetails)
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: `${vacancyDetails}` }}></div>
+      <Vacancy key={id} {...vacancyDetails}/>
+      <div dangerouslySetInnerHTML={{ __html: `${vacancyDetails}`}}></div>
     </>
   )
 }

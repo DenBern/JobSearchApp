@@ -13,7 +13,16 @@ export const Favorites = () => {
 
   return (
     <>
-      {favorites.map(favorite => <Vacancy key={favorite.id} {...favorite}>{favorite.profession}</Vacancy>)}
+      <div className="vacancies"
+                    style={
+                        {
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            gap: '15px'
+                        }
+                    }>
+      {favorites.map(favorite => <Vacancy key={favorite.id} {...favorite}/>)}
+      </div>
     </>
   )
 }

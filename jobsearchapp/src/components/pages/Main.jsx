@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import {useEffect, useState } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Search } from "../Search/Search";
@@ -8,7 +7,6 @@ import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
 import { Button } from '@mantine/core';
 import ReactPaginate from "react-paginate";
-
 
 export const Main = () => {
     const [vacancy, setVacancy] = useState('');
@@ -48,7 +46,7 @@ export const Main = () => {
             setPage(1)
         }
     }
-    
+
     return (
         <main>
             <div className="filters">
@@ -76,18 +74,6 @@ export const Main = () => {
                         onChange={value => setPaymentTo(value)}
                     />
                 </label>
-
-                {/* <select onChange={event => setCatalog(event.target.value)}>
-                    {catalogues.map(catalog => 
-                        <option 
-                            key={catalog.key}
-                            value={catalog.key}>
-                            {catalog.title_rus}
-                        </option>
-                    )}
-                </select>
-                <input type="number" name="payment_to" onChange={(e) => setPaymentTo(e.target.value)}/>
-                <input type="number" name="payment_from" onChange={(e) => setPaymentFrom(e.target.value)}/> */}
                 <Button
                     style={{backgroundColor: searchOn ? '#228be6' : '#228be64d'}}
                     onClick={submitFilters}>
@@ -124,7 +110,6 @@ export const Main = () => {
                         />
                     )
                 }
-                
             </div>
         </main>
     )
