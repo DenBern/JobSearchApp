@@ -1,10 +1,17 @@
+.vacancies {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .filters {
   width: 315px;
   height: 360px;
 }
 
 .search-content {
-  width: 60%;
+  width: 48.313rem;
+  gap: 16px;
 }
 
 li {

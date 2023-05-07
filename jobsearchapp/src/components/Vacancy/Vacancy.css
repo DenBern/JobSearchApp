@@ -1,0 +1,35 @@
+.mantine-c2s5ks {
+  display: flex;
+  flex-direction: column;
+  gap: 12.5px;
+  border-radius: 0.75rem;
+  border: 1px;
+}
+
+.mantine-Pagination-dots {
+  align-items: end;
+}
+
+.location {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon {
+  background: url(../../assets/png/location_Icon.png) no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  color: #7B7C88;
+}

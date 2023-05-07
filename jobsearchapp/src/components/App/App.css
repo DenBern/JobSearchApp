@@ -1,7 +1,7 @@
 main {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  background-color: #F5F5F5;
+  justify-content: center;
   padding-top: 40px;
+  gap: 28px;
 }

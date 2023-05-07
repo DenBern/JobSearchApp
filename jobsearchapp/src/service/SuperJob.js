@@ -76,7 +76,7 @@ export const SuperJob = () => {
                 }
             }
         )
-        .then(vacancy => setVacancyDetails(vacancy))
+        .then(vacancy => setVacancyDetails(vacancy.vacancyRichText))
     }
 
     const getCatalogues = async () => {

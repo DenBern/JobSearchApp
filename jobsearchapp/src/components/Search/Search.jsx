@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { TextInput, Button } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 
+import './Search.css';
+
 export const Search = (props) => {
     const {updateVacancy, updatePage} = props;
     const [search, setSearch] = useState('');
@@ -13,6 +15,7 @@ export const Search = (props) => {
 
     return (
         <TextInput 
+            radius="md"
             type="text"
             placeholder="Введите название вакансии"
             value={search}
@@ -21,11 +24,12 @@ export const Search = (props) => {
             rightSection=
                 {
                     <Button
+                        size="xs"
                         onClick={handlesearch}>
                         Поиск
                     </Button>
                 }
-            icon={<IconSearch size="0.8rem" />}
+            icon={<IconSearch size="1rem" />}
         />
     );
 }

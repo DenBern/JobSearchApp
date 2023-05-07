@@ -6,10 +6,7 @@ export const Header = () => {
   return (
     <div className="header">
       <div className="title-logo">
-        <div className="logo">
-          <div className="one"></div>
-          <div className="two"></div>
-        </div>
+        <div className="logo" />
         <h1>Jobored</h1>
       </div>
       <div>

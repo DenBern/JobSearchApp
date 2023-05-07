@@ -13,11 +13,11 @@ export const App = () => {
             <Router>
                 <Header />
                     <main>
-                <Routes>
-                        <Route path="*" element={<Main/>}/>
-                        <Route path="/:id" element={<VacancyDetails/>}/>
-                        <Route path="/favorite" element={<Favorites/>}/>
-                </Routes>
+                        <Routes>
+                            <Route path="*" element={<Main/>}/>
+                            <Route path="/:id" element={<VacancyDetails/>}/>
+                            <Route path="/favorite" element={<Favorites/>}/>
+                        </Routes>
                     </main>
             </Router>
         </>

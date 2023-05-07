@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Text, Paper, Title } from '@mantine/core';
 
 import favorite from '../../assets/png/Save_Button.png';
+import './Vacancy.css';
 
 export const Vacancy = (props) => {
     const {
@@ -27,24 +28,21 @@ export const Vacancy = (props) => {
             town,
             id,
         };
-
         localStorage.setItem(`${id}`, JSON.stringify(favoriteVacancy));
     };
 
     return (
         <>
-            <Paper shadow="xs" p="md">
-                <Title 
-                    order={3} 
-                    size={14}>
+            <Paper p="xl">
+                <Title order={4}>
                     <Link 
                         to={`/${id}`} 
-                        key={id}>
-                        {profession}
+                        key={id}
+                        >{profession}
                     </Link>
                 </Title>
-                <div className='wrapper' style={{display: "flex", flexDirection: "row"}}>
-                    <Text fw={700}>
+                <div className='wrapper'>
+                    <Text fw={700} size="md">
                     з/п 
                     {
                         payment_from && payment_to ? 
@@ -56,13 +54,15 @@ export const Vacancy = (props) => {
                         : ' Не указана'
                     }
                     </Text>
-                    <div className='divider' style={{display: 'flex', alignItems: 'center', color: '#7B7C88'}}>&bull;</div>
+                    <div className='divider'>
+                        &bull;
+                    </div>
                     <Text fz="md">
                         {type_of_work.title}
                     </Text>
                 </div>
                 <div className='location'>
-                    <div className='icon' style={{backgroundImage: 'url(../../../../assets/png/location_Icon.png)', width: '13.33px', height: '16.09px'}}></div>
+                    <div className='icon'/>
                     <Text>{town.title}</Text>
                 </div>
             </Paper>

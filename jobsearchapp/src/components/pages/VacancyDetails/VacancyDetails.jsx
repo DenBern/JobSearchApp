@@ -14,7 +14,7 @@ export const VacancyDetails = () => {
   
   return (
     <>
-      <Vacancy key={id} {...vacancyDetails}/>
+      {/* <Vacancy key={id} {...vacancyDetails}/> */}
       <div dangerouslySetInnerHTML={{ __html: `${vacancyDetails}`}}></div>
     </>
   )
