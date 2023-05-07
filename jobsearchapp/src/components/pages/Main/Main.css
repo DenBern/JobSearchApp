@@ -1,0 +1,28 @@
+.filters {
+  width: 315px;
+  height: 360px;
+}
+
+.search-content {
+  width: 60%;
+}
+
+li {
+  cursor: pointer;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #5E96FC;
+}
+
+.selected {
+  background-color: #5E96FC;
+  color: #eee;
+  border-radius: 3px;
+}
+
+select {
+  width: 100%;
+}

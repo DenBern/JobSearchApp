@@ -92,6 +92,5 @@ export const SuperJob = () => {
         .then(catalogues => setCatalogues([...catalogues]))
     };
 
-    console.log(catalogues)
     return {getAccessToken, getCatalogues, getVacancies, getVacancyDetails, vacancyDetails, vacancies, countVacancies, catalogues}
 }

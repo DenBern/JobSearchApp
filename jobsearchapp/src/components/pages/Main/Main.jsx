@@ -3,16 +3,16 @@ import { SuperJob } from "../../../service/SuperJob";
 import { Search } from "../../Search/Search";
 import { Vacancy } from "../../Vacancy/Vacancy";
 
+
+import { Pagination } from '@mantine/core';
 import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
 import { Button } from '@mantine/core';
-import ReactPaginate from "react-paginate";
-
+import  './Main.css';
 export const Main = () => {
     const [vacancy, setVacancy] = useState('');
-    const [page, setPage] = useState(1);
+    const [activePage, setPage] = useState(0);
     const [catalogValue, setCatalogValue] = useState(33);
-    const [searchOn, setSearchOn] = useState(false);
 
     const [paymentFrom, setPaymentFrom] = useState(0);
     const [paymentTo, setPaymentTo] = useState();
@@ -26,22 +26,20 @@ export const Main = () => {
     useEffect(() => {
         getAccessToken();
         getCatalogues();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, activePage)
     }, [])
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page)
-        setSearchOn(true)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [vacancy, page])
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, activePage)
+    }, [vacancy, activePage])
 
     const submitFilters = (e) => {
         e.preventDefault();
-        page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(1)
+        activePage === 0 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, activePage) : setPage(0)
     }
 
     return (
-        <main>
+        <>
             <div className="filters">
             <form>
                 <Select
@@ -53,14 +51,14 @@ export const Main = () => {
                     limit={2}
                 />
                 {/* <select onChange={event => setCatalogValue(event.target.value)}>
-                        {catalogues.map(catalog => 
-                            <option 
-                                key={catalog.key}
-                                value={catalog.key}>
-                                {catalog.title_rus}
-                            </option>
-                        )}
-                    </select> */}
+                    {catalogues.map(catalog => 
+                        <option 
+                            key={catalog.key}
+                            value={catalog.key}>
+                            {catalog.title_rus}
+                        </option>
+                    )}
+                </select> */}
                 <label>Оклад
                     <NumberInput
                         type="number"
@@ -95,24 +93,12 @@ export const Main = () => {
                     }>
                     {vacancies.map(vacancy => <Vacancy key={vacancy.id}  {...vacancy}/>)}
                 </div>
-                {vacancies.length > 0 && 
+                {vacancies.length >= 4 && 
                     (
-                        <ReactPaginate
-                            className="pagination"
-                            breakLabel="..."
-                            nextLabel=" >"
-                            previousLabel="< "
-                            pageCount={pages - 1}
-                            renderOnZeroPageCount={null}
-                            onPageChange={(e) => setPage(e.selected + 1)}
-                            pageRangeDisplayed={2}
-                            marginPagesDisplayed={1}
-                            forcePage={page - 1}
-                            initialPage={0}
-                        />
+                        <Pagination value={activePage} onChange={setPage} total={pages}/>
                     )
                 }
             </div>
-        </main>
+        </>
     )
 }

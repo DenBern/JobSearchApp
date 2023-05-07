@@ -21,7 +21,7 @@ export const Favorites = () => {
                 gap: '15px'
             }
         }>
-      {favorites.map(favorite => <Vacancy key={favorite.id} {...favorite}/>)}
+        {favorites.map(favorite => <Vacancy key={favorite.id} {...favorite}/>)}
       </div>
     </>
   )

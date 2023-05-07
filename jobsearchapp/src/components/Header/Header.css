@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title-logo {
+  display: flex;
+  flex-direction: row;
+}
+.logo {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.one {
+  position: absolute;
+  width: 12px;
+  height: 30px;
+
+  background: #5E96FC;
+  z-index: 1;
+
+  transform: rotate(-134.78deg);
+  border-radius: 50%;
+}
+
+.two {
+  position: absolute;
+  width: 12px;
+  height: 30px;
+
+  background: #5E96FC;
+
+  z-index: 2;
+  transform: rotate(-44.78deg);
+  border-radius: 50%;
+
+}
