@@ -9,18 +9,18 @@ export const Favorites = () => {
 
   for(let index = 0; index < localStorage.length; index++) {
     let key = localStorage.key(index);
-    const favorite = localStorage.getItem(`${key}`)
-    const result = JSON.parse(favorite)
-    favorites.push(result)
+    const favorite = localStorage.getItem(`${key}`);
+    const result = JSON.parse(favorite);
+    favorites.push(result);
   }
 
   useEffect(() => {
-
-  }, [favorites])
+    favorites.filter(favorite => favorite.id !== localStorage.key)
+  }, [])
 
   return (
     <>
-      <div className="vacancies">
+      <div className="favorites">
         {favorites.map(favorite => 
             <Vacancy 
               key={favorite.id} 

@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Text, Paper, Title } from '@mantine/core';
 
 import './Vacancy.css';
-
 export const Vacancy = (props) => {
 
     const {
@@ -16,6 +13,7 @@ export const Vacancy = (props) => {
         isFavorite,
         id
     } = props;
+
 
     const addToFavorite = () => {
         const favoriteVacancy = {
@@ -71,9 +69,9 @@ export const Vacancy = (props) => {
                     </div>
                 </div>
                 <button 
+                    type="button"
                     onClick={isFavorite ? removeFromFavorite : addToFavorite}
                     className={ isFavorite ? 'favoriteActive' : 'favoriteDefault'}
-                    type="button"
                 />
             </Paper>
         </>

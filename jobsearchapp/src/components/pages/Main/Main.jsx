@@ -91,8 +91,10 @@ export const Main = () => {
                     {vacancies.map(vacancy => 
                         <Vacancy 
                             key={vacancy.id}  
-                            {...vacancy}/
-                        >)}
+                            {...vacancy}
+                            isFavorite={localStorage.getItem(`${vacancy.id}`) ? true : false}
+                        />
+                    )}
                 </div>
                 {vacancies.length >= 3 && 
                     (

@@ -65,5 +65,4 @@
 
 .favoriteActive:hover {
   cursor: pointer;
-  background: url(../../assets/png/starHover.png) no-repeat;
 }
