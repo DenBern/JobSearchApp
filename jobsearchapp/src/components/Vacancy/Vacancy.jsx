@@ -1,25 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Text, Paper, Title } from '@mantine/core';
 
-import favorite from '../../assets/png/Save_Button.png';
 import './Vacancy.css';
 
 export const Vacancy = (props) => {
+
     const {
         profession, 
         payment_from, 
         payment_to, 
         type_of_work, 
-        town, 
-        id} = props;
-
-    const [isFavorite, setIsFavorite] = useState(false);
+        town,
+        isFavorite,
+        id
+    } = props;
 
     const addToFavorite = () => {
-        setIsFavorite(true);
-
         const favoriteVacancy = {
             profession,
             payment_from,
@@ -28,43 +26,55 @@ export const Vacancy = (props) => {
             town,
             id,
         };
+        
         localStorage.setItem(`${id}`, JSON.stringify(favoriteVacancy));
+    };
+        
+    const removeFromFavorite = () => {
+        localStorage.removeItem(`${id}`);
     };
 
     return (
         <>
             <Paper p="xl">
-                <Title order={4}>
-                    <Link 
-                        to={`/${id}`} 
-                        key={id}
-                        >{profession}
-                    </Link>
-                </Title>
-                <div className='wrapper'>
-                    <Text fw={700} size="md">
-                    з/п 
-                    {
-                        payment_from && payment_to ? 
-                        ` ${payment_from} - ${payment_to}`
-                        : payment_from && !payment_to ?
-                        ` от ${payment_from}` 
-                        : payment_to && !payment_from ? 
-                        ` до ${payment_to}` 
-                        : ' Не указана'
-                    }
-                    </Text>
-                    <div className='divider'>
-                        &bull;
+                <div className='wrapper-vacancy'>
+                    <Title order={4}>
+                        <Link 
+                            to={`/${id}`} 
+                            key={id}
+                            >{profession}
+                        </Link>
+                    </Title>
+                    <div className='wrapper'>
+                        <Text fw={700} size="md">
+                        з/п 
+                        {
+                            payment_from && payment_to ? 
+                            ` ${payment_from} - ${payment_to}`
+                            : payment_from && !payment_to ?
+                            ` от ${payment_from}` 
+                            : payment_to && !payment_from ? 
+                            ` до ${payment_to}` 
+                            : ' Не указана'
+                        }
+                        </Text>
+                        <div className='divider'>
+                            &bull;
+                        </div>
+                        <Text fz="md">
+                            {type_of_work.title}
+                        </Text>
                     </div>
-                    <Text fz="md">
-                        {type_of_work.title}
-                    </Text>
+                    <div className='location'>
+                        <div className='icon'/>
+                        <Text>{town.title}</Text>
+                    </div>
                 </div>
-                <div className='location'>
-                    <div className='icon'/>
-                    <Text>{town.title}</Text>
-                </div>
+                <button 
+                    onClick={isFavorite ? removeFromFavorite : addToFavorite}
+                    className={ isFavorite ? 'favoriteActive' : 'favoriteDefault'}
+                    type="button"
+                />
             </Paper>
         </>
     )

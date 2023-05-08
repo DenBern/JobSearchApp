@@ -5,41 +5,24 @@
   align-items: center;
   justify-content: space-around;
   background-color: #fff;
+  padding: 27px 0 27px 0;
+}
+
+h1 {
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .title-logo {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo {
-  display: flex;
+  background: url(../../assets/png/logo.png);
   width: 30px;
   height: 30px;
-  box-sizing: border-box;
-}
-
-.one {
-  position: absolute;
-  width: 12px;
-  height: 30px;
-
-  background: #5E96FC;
-  z-index: 1;
-
-  transform: rotate(-134.78deg);
-  border-radius: 50%;
-}
-
-.two {
-  position: absolute;
-  width: 12px;
-  height: 30px;
-
-  background: #5E96FC;
-
-  z-index: 2;
-  transform: rotate(-44.78deg);
-  border-radius: 50%;
-
 }

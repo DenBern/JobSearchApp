@@ -88,9 +88,13 @@ export const Main = () => {
                     updatePage={setPage}
                 />
                 <div className="vacancies">
-                    {vacancies.map(vacancy => <Vacancy key={vacancy.id}  {...vacancy}/>)}
+                    {vacancies.map(vacancy => 
+                        <Vacancy 
+                            key={vacancy.id}  
+                            {...vacancy}/
+                        >)}
                 </div>
-                {vacancies.length >= 4 && 
+                {vacancies.length >= 3 && 
                     (
                         <Pagination 
                             value={page} 

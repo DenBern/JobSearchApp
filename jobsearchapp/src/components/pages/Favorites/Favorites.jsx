@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { Vacancy } from "../../Vacancy/Vacancy";
+
+import './Favorites.css';
 
 export const Favorites = () => {
 
@@ -11,17 +14,20 @@ export const Favorites = () => {
     favorites.push(result)
   }
 
+  useEffect(() => {
+
+  }, [favorites])
+
   return (
     <>
-      <div className="vacancies"
-        style={
-            {
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '15px'
-            }
-        }>
-        {favorites.map(favorite => <Vacancy key={favorite.id} {...favorite}/>)}
+      <div className="vacancies">
+        {favorites.map(favorite => 
+            <Vacancy 
+              key={favorite.id} 
+              {...favorite} 
+              isFavorite={true}
+            />
+          )}
       </div>
     </>
   )

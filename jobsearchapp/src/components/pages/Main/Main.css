@@ -11,7 +11,7 @@
 
 .search-content {
   width: 48.313rem;
-  gap: 16px;
+  gap: 1rem;
 }
 
 li {
@@ -32,4 +32,12 @@ a {
 
 select {
   width: 100%;
+}
+
+.mantine-Pagination-dots {
+  align-items: end;
+}
+
+.mantine-Group-root {
+  font-family: 'Roboto', sans-serif;
 }
