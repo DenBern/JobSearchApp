@@ -10,10 +10,31 @@ export const Header = () => {
         <h1>Jobored</h1>
       </div>
       <div>
-        <NavLink style={({isActive}) => ({color: isActive ? '#5E96FC' : '#000', textDecoration: 'none'})} to="/">Поиск Вакансий</NavLink>
+        <NavLink 
+          style=
+            {
+              ({isActive}) => (
+                {
+                  color: isActive ? '#5E96FC' : '#000', textDecoration: 'none'
+                }
+              )
+            } 
+          to="/">Поиск Вакансий
+        </NavLink>
       </div>
       <div>
-        <NavLink style={({isActive}) => ({color: isActive ? '#5E96FC' : '#000', textDecoration: 'none'})} to="/favorite">Избранное</NavLink>
+        <NavLink 
+          style=
+            {
+              ({isActive}) => (
+                {
+                  color: isActive ? '#5E96FC' : '#000', textDecoration: 'none'
+                }
+              )
+            } 
+          to="/favorite"
+          >Избранное
+        </NavLink>
       </div>
     </div>
   )

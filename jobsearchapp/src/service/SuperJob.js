@@ -3,9 +3,9 @@ import { useState } from "react";
 export const SuperJob = () => {
 
     const [vacancies, setVacancies] = useState([]);
-    const [vacancyDetails, setVacancyDetails] = useState()
+    const [vacancyDetails, setVacancyDetails] = useState();
     const [countVacancies, setCountVacancies] = useState(0);
-    const [catalogues, setCatalogues] = useState([])
+    const [catalogues, setCatalogues] = useState([]);
 
     const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
     const urlPassword = '/oauth2/password/?';
@@ -41,7 +41,7 @@ export const SuperJob = () => {
                     }
                 }
             );
-        sessionStorage.setItem('token', `${token.access_token}`)
+        sessionStorage.setItem('token', `${token.access_token}`);
     };
 
     const getVacancies = async (keyword, paymentFrom, paymentTo = 9999999999999, catalogues = 33, countPerPage = 4, page) => {
@@ -61,8 +61,8 @@ export const SuperJob = () => {
                 }
         )
         .then(vacancies => {
-            setVacancies([...vacancies.objects])
-            setCountVacancies(vacancies.total)
+            setVacancies([...vacancies.objects]);
+            setCountVacancies(vacancies.total);
         })
     }
 
@@ -76,7 +76,7 @@ export const SuperJob = () => {
                 }
             }
         )
-        .then(vacancy => setVacancyDetails(vacancy.vacancyRichText))
+        .then(vacancy => setVacancyDetails(vacancy.vacancyRichText));
     }
 
     const getCatalogues = async () => {
@@ -89,8 +89,17 @@ export const SuperJob = () => {
                 }
             }
         )
-        .then(catalogues => setCatalogues([...catalogues]))
+        .then(catalogues => setCatalogues([...catalogues]));
     };
 
-    return {getAccessToken, getCatalogues, getVacancies, getVacancyDetails, vacancyDetails, vacancies, countVacancies, catalogues}
+    return {
+        getAccessToken, 
+        getCatalogues, 
+        getVacancies, 
+        getVacancyDetails, 
+        vacancyDetails, 
+        vacancies, 
+        countVacancies, 
+        catalogues
+    }
 }

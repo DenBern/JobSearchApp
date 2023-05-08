@@ -13,30 +13,39 @@ import  './Main.css';
 export const Main = () => {
     const [vacancy, setVacancy] = useState('');
     const [page, setPage] = useState(0);
+    
     const [catalogValue, setCatalogValue] = useState(33);
-
     const [paymentFrom, setPaymentFrom] = useState(0);
     const [paymentTo, setPaymentTo] = useState();
 
-    const {getAccessToken, getVacancies, vacancies, countVacancies, getCatalogues, catalogues} = SuperJob();
+    const {
+        getAccessToken, 
+        getVacancies, 
+        vacancies, 
+        countVacancies, 
+        getCatalogues, 
+        catalogues
+    } = SuperJob();
 
     const vacanciesOnThePage = 4;
     const maxAPILimit = 500;
-    const pages = countVacancies <= maxAPILimit ? Math.ceil(countVacancies / vacanciesOnThePage) : Math.ceil(maxAPILimit / vacanciesOnThePage) 
+    const pages = countVacancies <= maxAPILimit 
+        ? Math.ceil(countVacancies / vacanciesOnThePage) 
+        : Math.ceil(maxAPILimit / vacanciesOnThePage);
 
     useEffect(() => {
         getAccessToken();
         getCatalogues();
-        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page)
-    }, [])
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page);
+    }, []);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page)
-    }, [vacancy, page])
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page);
+    }, [vacancy, page]);
 
     const submitFilters = (e) => {
         e.preventDefault();
-        page === 0 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(0)
+        page === 0 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(0);
     }
 
     return (
@@ -92,11 +101,11 @@ export const Main = () => {
                         <Vacancy 
                             key={vacancy.id}  
                             {...vacancy}
-                            isFavorite={localStorage.getItem(`${vacancy.id}`) ? true : false}
+                            favorite={localStorage.getItem(`${vacancy.id}`) ? true : false}
                         />
                     )}
                 </div>
-                {vacancies.length >= 3 && 
+                {vacancies.length >= 4 && 
                     (
                         <Pagination 
                             value={page} 

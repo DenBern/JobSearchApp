@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Text, Paper, Title } from '@mantine/core';
-
+import { useState } from 'react';
 import './Vacancy.css';
 export const Vacancy = (props) => {
 
@@ -10,10 +10,11 @@ export const Vacancy = (props) => {
         payment_to, 
         type_of_work, 
         town,
-        isFavorite,
+        favorite,
         id
     } = props;
 
+    const [isFavorite, setIsFavorite] = useState(favorite);
 
     const addToFavorite = () => {
         const favoriteVacancy = {
@@ -24,12 +25,13 @@ export const Vacancy = (props) => {
             town,
             id,
         };
-        
         localStorage.setItem(`${id}`, JSON.stringify(favoriteVacancy));
+        setIsFavorite(true);
     };
         
     const removeFromFavorite = () => {
         localStorage.removeItem(`${id}`);
+        setIsFavorite(false);
     };
 
     return (

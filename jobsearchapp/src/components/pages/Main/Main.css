@@ -40,4 +40,5 @@ select {
 
 .mantine-Group-root {
   font-family: 'Roboto', sans-serif;
+  justify-content: center;
 }

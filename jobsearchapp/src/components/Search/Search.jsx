@@ -9,9 +9,9 @@ export const Search = (props) => {
     const [search, setSearch] = useState('');
 
     const handlesearch = () => {
-        updatePage(0)
-        updateVacancy(search)
-    }
+        updatePage(0);
+        updateVacancy(search);
+    };
 
     return (
         <TextInput 
