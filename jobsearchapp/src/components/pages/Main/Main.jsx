@@ -67,7 +67,7 @@ export const Main = () => {
                         <button className="reset-all">Сбросить все <span>&times;</span></button>
                     </div>
                     <Select
-                        data={catalogues.map(catalog => catalog.title_rus)}
+                        data={mapCatalogues()}
                         placeholder="Выберете отрасль"
                         label="Отрасль"
                         radius="md"
@@ -76,15 +76,6 @@ export const Main = () => {
                         value={catalogValue} 
                         onChange={setCatalogValue}
                     />
-                    {/* <select onChange={event => setCatalogValue(event.target.value)}>
-                        {catalogues.map(catalog => 
-                            <option 
-                                key={catalog.key}
-                                value={catalog.key}>
-                                {catalog.title_rus}
-                            </option>
-                        )}
-                    </select> */}
                     <label>Оклад
                         <NumberInput
                             type="number"
