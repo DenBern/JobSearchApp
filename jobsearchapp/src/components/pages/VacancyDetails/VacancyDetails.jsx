@@ -1,21 +1,28 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 import { Vacancy } from "../../Vacancy/Vacancy";
+
+import './VacancyDetails.css'
 
 export const VacancyDetails = () => {
   const {getVacancyDetails, vacancyDetails} = SuperJob();
   const {id} = useParams();
+  const contentRef = useRef(null);
   
   useEffect(() => {
     getVacancyDetails(id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    if (contentRef.current) {
+      contentRef.current.innerHTML = vacancyDetails;
+    }
+  }, [getVacancyDetails, vacancyDetails])
   
+  console.log(vacancyDetails)
+
   return (
     <>
       {/* <Vacancy key={id} {...vacancyDetails}/> */}
-      <div dangerouslySetInnerHTML={{ __html: `${vacancyDetails}`}}></div>
+      <div ref={contentRef} />
     </>
   )
 }

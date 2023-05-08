@@ -7,6 +7,8 @@ export const SuperJob = () => {
     const [countVacancies, setCountVacancies] = useState(0);
     const [catalogues, setCatalogues] = useState([]);
 
+    const [loading, setLoading] = useState(false)
+
     const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
     const urlPassword = '/oauth2/password/?';
     const urlVacancies = '/vacancies/?'; 
@@ -44,7 +46,8 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`);
     };
 
-    const getVacancies = async (keyword, paymentFrom, paymentTo = 9999999999999, catalogues = 33, countPerPage = 4, page) => {
+    const getVacancies = async (keyword, paymentFrom = 0, paymentTo = undefined, catalogues = [], countPerPage = 4, page) => {
+        setLoading(true)
         await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
             &payment_from=${paymentFrom}
@@ -63,6 +66,7 @@ export const SuperJob = () => {
         .then(vacancies => {
             setVacancies([...vacancies.objects]);
             setCountVacancies(vacancies.total);
+            setLoading(false)
         })
     }
 
@@ -100,6 +104,7 @@ export const SuperJob = () => {
         vacancyDetails, 
         vacancies, 
         countVacancies, 
-        catalogues
+        catalogues,
+        loading
     }
 }

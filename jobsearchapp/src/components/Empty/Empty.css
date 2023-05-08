@@ -1,0 +1,23 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 80px;
+  margin: 0 auto;
+}
+.empty-image {
+  background: url(../../assets/png/notFound.png) no-repeat;
+  background-size: cover;
+  width: 240px;
+  height: 230px;
+}
+
+.to-main {
+  width: 164px;
+  font-size: 14px;
+  background: #DEECFF;
+  padding: 10px 24px;
+  text-align: center;
+  border-radius: 8px;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Vacancy } from "../../Vacancy/Vacancy";
 
 import './Favorites.css';
+import { Empty } from "../../Empty/Empty";
 
 export const Favorites = () => {
 
@@ -19,19 +20,23 @@ export const Favorites = () => {
   };
 
   useEffect(() => {
-    favoritesChange();
-  }, []);
+    favoritesChange()
+  }, [])
 
   return (
     <>
       <div className="favorites">
-        {favorites.map(favorite => 
+      {favorites.length !== 0 ? 
+        (favorites.map(favorite => 
             <Vacancy 
               key={favorite.id} 
               {...favorite} 
               favorite={true}
             />
-          )}
+          )
+        )
+          : <Empty/>
+      }
       </div>
     </>
   )

@@ -4,4 +4,6 @@ main {
   justify-content: center;
   padding-top: 40px;
   gap: 28px;
+  max-width: 1116px;
+  margin: 0 auto;
 }

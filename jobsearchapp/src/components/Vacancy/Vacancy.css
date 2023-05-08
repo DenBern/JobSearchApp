@@ -12,6 +12,13 @@
   padding: 1.5rem;
 }
 
+.mantine-6y50lo {
+  max-width: 32rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .wrapper-vacancy {
   display: flex;
   flex-direction: column;
@@ -25,7 +32,7 @@
 }
 
 .icon {
-  background: url(../../assets/png/location_icon.png) no-repeat;
+  background: url(../../assets/png/location.png) no-repeat;
   width: 20px;
   height: 20px;
 }

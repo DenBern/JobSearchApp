@@ -1,11 +1,18 @@
 .header {
   display: flex;
-  flex-direction: row;
   width: 100%;
   align-items: center;
-  justify-content: space-around;
   background-color: #fff;
-  padding: 27px 0 27px 0;
+  padding: 24px 0 24px 0;
+}
+
+.container {
+  width: 1116px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+  gap: 280px;
 }
 
 h1 {
@@ -25,4 +32,10 @@ h1 {
   background: url(../../assets/png/logo.png);
   width: 30px;
   height: 30px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 3.75rem;
 }

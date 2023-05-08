@@ -4,9 +4,30 @@
   gap: 15px;
 }
 
+.title-filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.reset-all {
+  border: none;
+  background-color: #fff;
+  color: #ACADB9;
+}
+
 .filters {
   width: 315px;
   height: 360px;
+  background-color: #fff;
+  border-radius: 12px;
 }
 
 .search-content {
@@ -32,6 +53,11 @@ a {
 
 select {
   width: 100%;
+}
+
+.mantine-y7odgk {
+  max-height: 3rem;
+  padding-left: 0.875rem;
 }
 
 .mantine-Pagination-dots {
