@@ -60,8 +60,8 @@ export const Main = () => {
 
     return (
         <>
+        <div className="wrapperfilters">
             <div className="filters">
-                <form>
                     <div className="title-filters">
                         <h3>Фильтры</h3>
                         <button className="reset-all">Сбросить все <span>&times;</span></button>
@@ -98,7 +98,7 @@ export const Main = () => {
                         onClick={submitFilters}>
                         Применить
                     </Button>
-                </form>
+            </div>
             </div>
             <div className="search-content">
                 <Search 
