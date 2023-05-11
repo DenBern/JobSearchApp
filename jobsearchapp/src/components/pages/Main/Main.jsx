@@ -10,6 +10,7 @@ import { NumberInput } from '@mantine/core';
 import { Button } from '@mantine/core';
 
 import  './Main.css';
+import selectDown from '../../../assets/svg/selectDown.svg'
 
 export const Main = () => {
     const [vacancy, setVacancy] = useState('');
@@ -58,25 +59,40 @@ export const Main = () => {
         })
     }
 
+    const clearFilters = () => {
+        setCatalogValue(null)
+        setPaymentFrom(null)
+        setPaymentTo(null)
+    }
+
     return (
         <>
         <div className="wrapperfilters">
             <div className="filters">
                     <div className="title-filters">
                         <h3>Фильтры</h3>
-                        <button className="reset-all">Сбросить все <span>&times;</span></button>
+                        <button
+                            onClick={clearFilters}
+                            className="reset-all">
+                            Сбросить все
+                            <span className="sign">&times;</span>
+                        </button>
                     </div>
-                    <Select
-                        data={mapCatalogues()}
-                        placeholder="Выберете отрасль"
-                        label="Отрасль"
-                        radius="md"
-                        size="md"
-                        limit={2}
-                        value={catalogValue} 
-                        onChange={setCatalogValue}
-                    />
-                    <label>Оклад
+                    <div className="wrapper-industry">
+                        <p>Отрасль</p>
+                        <Select
+                            data={mapCatalogues()}
+                            placeholder="Выберете отрасль"
+                            radius="md"
+                            size="md"
+                            limit={2}
+                            value={catalogValue} 
+                            onChange={setCatalogValue}
+                        />
+                    </div>
+
+                    <div className="wrapper-salary">
+                        <p>Оклад</p>
                         <NumberInput
                             type="number"
                             placeholder="От"
@@ -92,9 +108,8 @@ export const Main = () => {
                             onChange={value => setPaymentTo(value)}
                             step={1000}
                         />
-                    </label>
+                    </div>
                     <Button
-                        // style={{backgroundColor: searchOn ? '#228be6' : '#228be64d'}}
                         onClick={submitFilters}>
                         Применить
                     </Button>

@@ -7,7 +7,7 @@
 .title-filters {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 67px
 }
 
 form {
@@ -18,6 +18,9 @@ form {
 }
 
 .reset-all {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 20px;
   border: none;
   background-color: #fff;
   color: #ACADB9;
@@ -25,9 +28,10 @@ form {
 
 .filters {
   width: 315px;
-  height: 360px;
   background-color: #fff;
   border-radius: 12px;
+  border: 1px solid #EAEBED;
+  padding: 20px;
 }
 
 .search-content {
@@ -67,4 +71,67 @@ select {
 .mantine-Group-root {
   font-family: 'Roboto', sans-serif;
   justify-content: center;
+}
+
+.mantine-1joosma {
+  padding-left: calc(1.25rem / 3);
+}
+
+.mantine-x0i9fi {
+  border: none;
+}
+
+.mantine-1g3thxc {
+  border: none;
+}
+
+.mantine-NumberInput-input {
+  min-height: 2.625rem;
+}
+
+.mantine-g7194 {
+  width: 100%;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+.sign {
+  padding-left: 10px;
+}
+
+.mantine-b11773 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: #232134;
+}
+
+.wrapper-industry {
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding-top: 28px;
+}
+
+.wrapper-salary {
+  padding: 20px 0 20px 0;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+} 
+
+.mantine-1ejqehl {
+  max-height: 42px;
+}
+
+.mantine-7c7vou {
+  margin-bottom: 0;
+} 
+
+.mantine-1wpc1xj {
+  border-radius: 8px;
 }
