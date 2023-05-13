@@ -8,7 +8,7 @@ export const Empty = () => {
     <div className="empty">
       <div className="empty-image"/>
       <Text 
-        fz="xl" 
+        fz="1.5rem" 
         fw={700}
         >Упс, здесь еще ничего нет!
       </Text>

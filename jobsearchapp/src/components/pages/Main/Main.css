@@ -1,7 +1,8 @@
 .vacancies {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
+  padding-top: 1rem;
 }
 
 .title-filters {
@@ -36,7 +37,8 @@ form {
 
 .search-content {
   width: 48.313rem;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 li {

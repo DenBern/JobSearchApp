@@ -9,7 +9,7 @@
   border-radius: 0.75rem;
   border: 1px solid #EAEBED;
   justify-content:space-between;
-  padding: 1.5rem;
+  padding: 1.35rem;
 }
 
 .mantine-6y50lo {
@@ -22,13 +22,14 @@
 .wrapper-vacancy {
   display: flex;
   flex-direction: column;
-  gap: 12.5px;
+  gap: 8.5px;
 }
 
 .location {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 8px;
 }
 
 .icon {
