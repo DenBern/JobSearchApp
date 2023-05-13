@@ -4,15 +4,30 @@
 }
 
 .mantine-1nmvwx4 {
-  width: 5.188rem;
+  width: 6.75rem;
 }
 
 .mantine-asjeru {
-  max-width: 5.188rem;
+  width: 5.3rem;
   font-size: 0.875rem;
+  border-radius: 0.5rem;
 }
 
 .mantine-13v5ff3 {
   padding-top: 2.5rem;
   padding-bottom: 2.75rem;
+}
+
+.search-icon {
+  background: url(../../assets/png/searchIcon.png) no-repeat;
+  width: 1rem;
+  height: 1rem;
+}
+
+.mantine-16k3d8y {
+  width: 2.5rem;
+}
+
+.mantine-y7odgk {
+  height: 3rem;
 }

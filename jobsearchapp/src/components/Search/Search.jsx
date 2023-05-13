@@ -4,6 +4,8 @@ import { IconSearch } from '@tabler/icons-react';
 
 import './Search.css';
 
+import searchIcon from '../../assets/svg/searchIcon.svg'
+
 export const Search = (props) => {
     const {updateVacancy, updatePage} = props;
     const [search, setSearch] = useState('');
@@ -29,7 +31,7 @@ export const Search = (props) => {
                         Поиск
                     </Button>
                 }
-            icon={<IconSearch size="1rem" />}
+            icon={<div className='search-icon'></div>}
         />
     );
 }
