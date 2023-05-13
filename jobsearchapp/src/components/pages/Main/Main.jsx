@@ -2,15 +2,12 @@ import {useEffect, useState } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 import { Search } from "../../Search/Search";
 import { Vacancy } from "../../Vacancy/Vacancy";
-import { Skeleton } from "@mantine/core";
+import { Filters } from "../../Filters/Filters";
 
+import { Skeleton } from "@mantine/core";
 import { Pagination } from '@mantine/core';
-import { Select } from "@mantine/core";
-import { NumberInput } from '@mantine/core';
-import { Button } from '@mantine/core';
 
 import  './Main.css';
-import selectDown from '../../../assets/svg/selectDown.svg'
 
 export const Main = () => {
     const [vacancy, setVacancy] = useState('');
@@ -25,8 +22,6 @@ export const Main = () => {
         getVacancies, 
         vacancies, 
         countVacancies, 
-        getCatalogues, 
-        catalogues,
         loading
     } = SuperJob();
 
@@ -38,88 +33,28 @@ export const Main = () => {
 
     useEffect(() => {
         getAccessToken();
-        getCatalogues();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vacancy, page]);
-
-    const submitFilters = (e) => {
-        e.preventDefault();
-        page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(1);
-    }
-
-    const mapCatalogues = () => {
-        return catalogues.map(catalog => {
-            return {
-                value: catalog.key,
-                label: catalog.title_rus,
-            }
-        })
-    }
-
-    const clearFilters = () => {
-        setCatalogValue(null)
-        setPaymentFrom(null)
-        setPaymentTo(null)
-    }
 
     return (
         <>
-        <div className="wrapperfilters">
-            <div className="filters">
-                    <div className="title-filters">
-                        <h3>Фильтры</h3>
-                        <button
-                            disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-                            onClick={clearFilters}
-                            className="reset-all">
-                            Сбросить все
-                            <span className="sign">&times;</span>
-                        </button>
-                    </div>
-                    <div className="wrapper-industry">
-                        <p>Отрасль</p>
-                        <Select
-                            data={mapCatalogues()}
-                            placeholder="Выберете отрасль"
-                            radius="md"
-                            size="md"
-                            limit={2}
-                            value={catalogValue} 
-                            onChange={setCatalogValue}
-                        />
-                    </div>
-
-                    <div className="wrapper-salary">
-                        <p>Оклад</p>
-                        <NumberInput
-                            type="number"
-                            placeholder="От"
-                            min={0}
-                            max={paymentTo}
-                            onChange={value => setPaymentFrom(value)}
-                            step={1000}
-                        />
-                        <NumberInput
-                            type="number"
-                            placeholder="До"
-                            min={paymentFrom}
-                            onChange={value => setPaymentTo(value)}
-                            step={1000}
-                        />
-                    </div>
-                    <Button
-                        disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-                        onClick={submitFilters}>
-                        Применить
-                    </Button>
-            </div>
-            </div>
+            <Filters 
+                page={page} 
+                vacancy={vacancy} 
+                vacanciesOnThePage={setCatalogValue} 
+                setPage={setPage}
+                setPaymentFrom={setPaymentFrom}
+                setPaymentTo={setPaymentTo}
+                setCatalogValue={setCatalogValue}
+            />
             <div className="search-content">
                 <Search 
-                    updateVacancy={(search) => setVacancy(search)} 
+                    updateVacancy={(search) => setVacancy(search)}
                     updatePage={setPage}
                 />
                 <div className="vacancies">

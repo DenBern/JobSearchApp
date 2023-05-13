@@ -1,0 +1,26 @@
+.vacancy-details {
+  max-width: 773px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.vacancy-details p {
+  font-weight: 700;
+  padding-top: 10px;
+}
+
+ul {
+  padding-left: 15px;
+}
+
+li {
+  font-family: 'Inter', sans-serif;
+  list-style: disc;
+  font-weight: 400;
+  cursor: auto;
+}
+
+br {
+  height: 0px;
+}

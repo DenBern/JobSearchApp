@@ -3,6 +3,8 @@ import { useEffect, useRef } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 import { Vacancy } from "../../Vacancy/Vacancy";
 
+import { Loader } from '@mantine/core';
+
 import './VacancyDetails.css'
 
 export const VacancyDetails = () => {
@@ -15,6 +17,7 @@ export const VacancyDetails = () => {
     if (contentRef.current) {
       contentRef.current.innerHTML = vacancyDetails;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getVacancyDetails, vacancyDetails])
   
   console.log(vacancyDetails)
@@ -22,7 +25,9 @@ export const VacancyDetails = () => {
   return (
     <>
       {/* <Vacancy key={id} {...vacancyDetails}/> */}
-      <div ref={contentRef} />
+      {vacancyDetails 
+        ? <div className="vacancy-details" ref={contentRef} /> 
+        : <Loader />}
     </>
   )
 }

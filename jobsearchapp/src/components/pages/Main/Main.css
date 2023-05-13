@@ -5,43 +5,6 @@
   padding-top: 1rem;
 }
 
-.title-filters {
-  display: flex;
-  flex-direction: row;
-  gap: 67px
-}
-
-.reset-all {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
-  line-height: 20px;
-  border: none;
-  background-color: #fff;
-  color: #5E96FC;
-}
-
-.reset-all:disabled {
-  color: #ACADB9;
-}
-
-.reset-all:hover {
-  color: #92C1FF;
-}
-
-.filters {
-  width: 315px;
-  background-color: #fff;
-  border-radius: 12px;
-  border: 1px solid #EAEBED;
-  padding: 20px;
-}
-
-.search-content {
-  width: 48.313rem;
-  display: flex;
-  flex-direction: column;
-}
-
 li {
   cursor: pointer;
   list-style: none;
@@ -52,14 +15,8 @@ a {
   color: #5E96FC;
 }
 
-.selected {
-  background-color: #5E96FC;
-  color: #eee;
-  border-radius: 3px;
-}
-
-select {
-  width: 100%;
+.mantine-Button-root {
+  border-radius: 0.5rem;
 }
 
 .mantine-y7odgk {
@@ -76,85 +33,21 @@ select {
   justify-content: center;
 }
 
-.mantine-1joosma {
-  padding-left: calc(1.25rem / 3);
-}
 
-.mantine-x0i9fi {
-  border: none;
-}
 
-.mantine-1g3thxc {
-  border: none;
-}
 
-.mantine-NumberInput-input {
-  min-height: 2.625rem;
-}
 
-.mantine-g7194 {
-  width: 100%;
-  color: #fff;
-  background-color: #3B7CD3;
-}
 
-.mantine-g7194:disabled {
-  color: #fff;
-  background-color: #5E96FC;
-}
 
-.mantine-g7194:hover {
-  background-color: #92C1FF;
-}
 
-h3 {
-  font-size: 1.25rem;
-}
 
-.sign {
-  padding-left: 10px;
-}
 
-.mantine-b11773 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  color: #232134;
-}
 
-.wrapper-industry {
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 
-  padding-top: 28px;
-}
 
-.wrapper-salary {
-  padding: 20px 0 20px 0;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-} 
 
-.mantine-7c7vou {
-  margin-bottom: 0;
-} 
 
-.mantine-1wpc1xj {
-  border-radius: 8px;
-}
 
-.mantine-Select-dropdown	 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-}
 
-.mantine-1esv455:hover {
-  background-color: #DEECFF;
-}
 
-.mantine-1n8gmw6[data-active] {
-  background-color: #5E96FC;
-}
+

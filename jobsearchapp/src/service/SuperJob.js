@@ -15,7 +15,7 @@ export const SuperJob = () => {
     const urlCatalogues = '/catalogues/';
     const urlVacancy = '/vacancies/'
     
-    // const tokenSave = 'v3.r.137440105.23922774053d2681b240701d58f9117a3eb040dd.1d6c5fe4f7ee80884e089f319af0d45e1c74b4be';
+    // const tokenSave = 'v3.r.137440105.b59ef02f1f3eed03ff3922bfc7caa36d25e70814.96d2d5461f64f9feefb4ed225fa025586dc61349';
     const credits = {
         login: 'login=sergei.stralenia@gmail.com',
         password: 'password=paralect123',
