@@ -11,20 +11,21 @@
   gap: 67px
 }
 
-form {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-}
-
 .reset-all {
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
   line-height: 20px;
   border: none;
   background-color: #fff;
+  color: #5E96FC;
+}
+
+.reset-all:disabled {
   color: #ACADB9;
+}
+
+.reset-all:hover {
+  color: #92C1FF;
 }
 
 .filters {
@@ -93,6 +94,17 @@ select {
 
 .mantine-g7194 {
   width: 100%;
+  color: #fff;
+  background-color: #3B7CD3;
+}
+
+.mantine-g7194:disabled {
+  color: #fff;
+  background-color: #5E96FC;
+}
+
+.mantine-g7194:hover {
+  background-color: #92C1FF;
 }
 
 h3 {
@@ -132,4 +144,17 @@ h3 {
 
 .mantine-1wpc1xj {
   border-radius: 8px;
+}
+
+.mantine-Select-dropdown	 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.mantine-1esv455:hover {
+  background-color: #DEECFF;
+}
+
+.mantine-1n8gmw6[data-active] {
+  background-color: #5E96FC;
 }

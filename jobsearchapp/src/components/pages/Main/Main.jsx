@@ -72,6 +72,7 @@ export const Main = () => {
                     <div className="title-filters">
                         <h3>Фильтры</h3>
                         <button
+                            disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
                             onClick={clearFilters}
                             className="reset-all">
                             Сбросить все
@@ -110,6 +111,7 @@ export const Main = () => {
                         />
                     </div>
                     <Button
+                        disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
                         onClick={submitFilters}>
                         Применить
                     </Button>
