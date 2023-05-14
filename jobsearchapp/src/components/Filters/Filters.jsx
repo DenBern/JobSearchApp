@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
 import { Button } from '@mantine/core';
+
+import { Context } from "../../context";
 
 import './Filters.css';
 
@@ -10,14 +12,20 @@ export const Filters = (props) => {
 
   const { updateFilters } = props;
 
-  const [catalogValue, setCatalogValue] = useState(null);
-  const [paymentFrom, setPaymentFrom] = useState(null);
-  const [paymentTo, setPaymentTo] = useState(null);
+  const {
+    catalogValue, 
+    setCatalogValue, 
+    paymentFrom, 
+    setPaymentFrom,
+    paymentTo,
+    setPaymentTo,
+    setActiveBtn,
+  } = useContext(Context);
 
   const {catalogues, getCatalogues} = SuperJob();
 
   useEffect(() => {
-    getCatalogues()
+    getCatalogues();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -34,10 +42,13 @@ export const Filters = (props) => {
           <h3>Фильтры</h3>
           <button
             disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-            onClick={() => clearFilters()}
+            onClick={clearFilters}
             className="reset-all">
             Сбросить все
-            <span className="sign">&times;</span>
+            <span 
+              className="sign">
+              &times;
+            </span>
           </button>
         </div>
         <div className="wrapper-industry">
@@ -79,7 +90,11 @@ export const Filters = (props) => {
         </div>
         <Button
           disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-          onClick={() => updateFilters(catalogValue, paymentFrom, paymentTo)}>
+          onClick={() => {
+              updateFilters(catalogValue, paymentFrom, paymentTo);
+              setActiveBtn(true);
+            }
+          }>
           Применить
         </Button>
       </div>

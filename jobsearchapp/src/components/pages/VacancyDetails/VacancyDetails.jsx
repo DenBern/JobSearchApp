@@ -1,33 +1,38 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useRef } from "react";
 import { SuperJob } from "../../../service/SuperJob";
-import { Vacancy } from "../../Vacancy/Vacancy";
 
 import { Loader } from '@mantine/core';
+import { Vacancy } from '../../Vacancy/Vacancy';
 
-import './VacancyDetails.css'
+import './VacancyDetails.css';
 
 export const VacancyDetails = () => {
-  const {getVacancyDetails, vacancyDetails} = SuperJob();
+
+  const {getVacancyDetails, vacancyDetails, loadVacancy} = SuperJob();
   const {id} = useParams();
   const contentRef = useRef(null);
   
   useEffect(() => {
-    getVacancyDetails(id)
+    getVacancyDetails(id);
     if (contentRef.current) {
-      contentRef.current.innerHTML = vacancyDetails;
+      contentRef.current.innerHTML = `${vacancyDetails}`;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getVacancyDetails, vacancyDetails])
-  
-  console.log(vacancyDetails)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(vacancyDetails.details)
+    
 
   return (
     <>
-      {/* <Vacancy key={id} {...vacancyDetails}/> */}
-      {vacancyDetails 
-        ? <div className="vacancy-details" ref={contentRef} /> 
-        : <Loader />}
+      {loadVacancy ? <Loader/> : (
+          <div className="details">
+            <Vacancy {...vacancyDetails}/>
+            <div className="vacancy-details" ref={contentRef}/>
+          </div>
+        )
+      }
     </>
   )
 }

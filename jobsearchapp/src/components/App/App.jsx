@@ -8,6 +8,7 @@ import { Favorites } from '../pages/Favorites/Favorites';
 import './App.css';
 
 export const App = () => {
+
     return (
         <>
             <Router>

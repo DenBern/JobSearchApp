@@ -1,5 +1,10 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 48.313rem;
+}
 .vacancy-details {
-  max-width: 773px;
   padding: 24px;
   background-color: #fff;
   border-radius: 12px;

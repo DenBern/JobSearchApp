@@ -1,4 +1,4 @@
-import { Button, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 
 import './Empty.css';
 import { NavLink } from "react-router-dom";

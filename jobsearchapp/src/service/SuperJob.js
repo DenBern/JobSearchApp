@@ -9,11 +9,12 @@ export const SuperJob = () => {
     const urlVacancy = '/vacancies/';
 
     const [vacancies, setVacancies] = useState([]);
-    const [vacancyDetails, setVacancyDetails] = useState();
+    const [vacancyDetails, setVacancyDetails] = useState({});
     const [countVacancies, setCountVacancies] = useState(0);
     const [catalogues, setCatalogues] = useState([]);
 
     const [loading, setLoading] = useState(false);
+    const [loadVacancy, setLoadVacancy] = useState(false)
     
     // const tokenSave = 'v3.r.137440105.b59ef02f1f3eed03ff3922bfc7caa36d25e70814.96d2d5461f64f9feefb4ed225fa025586dc61349';
     const credits = {
@@ -46,7 +47,7 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`);
     };
 
-    const getVacancies = async (keyword, paymentFrom = 0, paymentTo = undefined, catalogues = [], countPerPage = 4, page, noAgreement) => {
+    const getVacancies = async (keyword, paymentFrom = 0, paymentTo = undefined, catalogues = [], countPerPage = 4, page, noAgreement = 1) => {
         setLoading(true);
         await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
@@ -72,6 +73,7 @@ export const SuperJob = () => {
     }
 
     const getVacancyDetails = async (id) => {
+        setLoadVacancy(true);
         await getData(`${URL}${urlVacancy}${id}/`, 
             {
                 headers: {
@@ -81,7 +83,20 @@ export const SuperJob = () => {
                 }
             }
         )
-        .then(vacancy => setVacancyDetails(vacancy.vacancyRichText));
+        .then(vacancy => {
+            setVacancyDetails(
+                {
+                    profession: vacancy.profession,
+                    payment_from: vacancy.payment_from,
+                    payment_to: vacancy.payment_to,
+                    town_id: vacancy.town.title,
+                    type_of_work_id: vacancy.type_of_work.title,
+                    details: vacancy.vacancyRichText,
+                    id: vacancy.id,
+                }
+            );
+            setLoadVacancy(false)
+        })
     }
 
     const getCatalogues = async () => {
@@ -106,6 +121,7 @@ export const SuperJob = () => {
         vacancies, 
         countVacancies, 
         catalogues,
-        loading
+        loading,
+        loadVacancy
     }
 }

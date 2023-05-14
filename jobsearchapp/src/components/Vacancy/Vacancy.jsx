@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { Text, Paper, Title } from '@mantine/core';
 import { useState } from 'react';
 import './Vacancy.css';
-export const Vacancy = (props) => {
 
+export const Vacancy = (props) => {
     const {
         profession, 
         payment_from, 
@@ -11,8 +11,11 @@ export const Vacancy = (props) => {
         type_of_work, 
         town,
         favorite,
-        id, 
+        id,
+        town_id,
+        type_of_work_id,
     } = props;
+
 
     const [isFavorite, setIsFavorite] = useState(favorite);
 
@@ -62,12 +65,16 @@ export const Vacancy = (props) => {
                             &bull;
                         </div>
                         <Text fz="md">
-                            {type_of_work.title}
+                            {type_of_work && type_of_work.title}
+                            {type_of_work_id && type_of_work_id}
                         </Text>
                     </div>
                     <div className='location'>
                         <div className='icon'/>
-                        <Text>{town.title}</Text>
+                        <Text>
+                            {town && town.title}
+                            {town_id && town_id}
+                        </Text>
                     </div>
                 </div>
                 <button 
