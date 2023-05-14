@@ -2,18 +2,18 @@ import { useState } from "react";
 
 export const SuperJob = () => {
 
+    const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
+    const urlPassword = '/oauth2/password/?';
+    const urlVacancies = '/vacancies/?'; 
+    const urlCatalogues = '/catalogues/';
+    const urlVacancy = '/vacancies/';
+
     const [vacancies, setVacancies] = useState([]);
     const [vacancyDetails, setVacancyDetails] = useState();
     const [countVacancies, setCountVacancies] = useState(0);
     const [catalogues, setCatalogues] = useState([]);
 
-    const [loading, setLoading] = useState(false)
-
-    const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
-    const urlPassword = '/oauth2/password/?';
-    const urlVacancies = '/vacancies/?'; 
-    const urlCatalogues = '/catalogues/';
-    const urlVacancy = '/vacancies/'
+    const [loading, setLoading] = useState(false);
     
     // const tokenSave = 'v3.r.137440105.b59ef02f1f3eed03ff3922bfc7caa36d25e70814.96d2d5461f64f9feefb4ed225fa025586dc61349';
     const credits = {
@@ -46,15 +46,16 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`);
     };
 
-    const getVacancies = async (keyword, paymentFrom = 0, paymentTo = undefined, catalogues = [], countPerPage = 4, page) => {
-        setLoading(true)
+    const getVacancies = async (keyword, paymentFrom = 0, paymentTo = undefined, catalogues = [], countPerPage = 4, page, noAgreement) => {
+        setLoading(true);
         await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
             &payment_from=${paymentFrom}
             &payment_to=${paymentTo}
             &catalogues=${catalogues}
             &count=${countPerPage}
-            &page=${page}`,
+            &page=${page}
+            &no_agreement=${noAgreement}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,

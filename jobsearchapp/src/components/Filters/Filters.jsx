@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
@@ -8,36 +8,24 @@ import './Filters.css';
 
 export const Filters = (props) => {
 
-  const {
-    page, 
-    vacancy, 
-    vacanciesOnThePage, 
-    setPage, 
-    setPaymentFrom, 
-    setPaymentTo, 
-    paymentFrom, 
-    paymentTo,
-    catalogValue,
-    setCatalogValue
-  } = props;
+  const { updateFilters } = props;
 
-  const {catalogues, getVacancies, getCatalogues} = SuperJob();
+  const [catalogValue, setCatalogValue] = useState(null);
+  const [paymentFrom, setPaymentFrom] = useState(null);
+  const [paymentTo, setPaymentTo] = useState(null);
 
-  const submitFilters = () => {
-    page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(1);
-  }
+  const {catalogues, getCatalogues} = SuperJob();
+
   useEffect(() => {
     getCatalogues()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-
-const clearFilters = () => {
+  const clearFilters = () => {
     setCatalogValue(null)
     setPaymentFrom(null)
     setPaymentTo(null)
-}
+  }
 
   return (
     <div className="wrapperfilters">
@@ -46,7 +34,7 @@ const clearFilters = () => {
           <h3>Фильтры</h3>
           <button
             disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-            onClick={clearFilters}
+            onClick={() => clearFilters()}
             className="reset-all">
             Сбросить все
             <span className="sign">&times;</span>
@@ -91,7 +79,7 @@ const clearFilters = () => {
         </div>
         <Button
           disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-          onClick={submitFilters}>
+          onClick={() => updateFilters(catalogValue, paymentFrom, paymentTo)}>
           Применить
         </Button>
       </div>

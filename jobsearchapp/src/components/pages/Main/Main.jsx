@@ -37,17 +37,25 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page);
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vacancy, page]);
 
+    useEffect(() => {
+        page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page, 1) : setPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [catalogValue, paymentTo, paymentFrom]);
+
     return (
         <>
-            <Filters 
-                page={page} 
-                vacancy={vacancy} 
-                vacanciesOnThePage={setCatalogValue} 
-                setPage={setPage}
+            <Filters
+                updateFilters={
+                    (catalogValue, paymentFrom, paymentTo) => {
+                        setCatalogValue(catalogValue)
+                        setPaymentFrom(paymentFrom)
+                        setPaymentTo(paymentTo)
+                    }
+                }
                 setPaymentFrom={setPaymentFrom}
                 setPaymentTo={setPaymentTo}
                 setCatalogValue={setCatalogValue}
@@ -76,7 +84,7 @@ export const Main = () => {
                 {countVacancies > 4 && 
                     (
                         <Pagination 
-                            value={page} 
+                            value={page}
                             onChange={setPage} 
                             total={pages}
                         />
