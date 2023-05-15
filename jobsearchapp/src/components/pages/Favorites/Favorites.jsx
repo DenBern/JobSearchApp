@@ -28,7 +28,7 @@ export const Favorites = () => {
       <div className="favorites">
       {favorites.length !== 0 ? 
         (favorites.map(favorite => 
-            <Vacancy 
+            <Vacancy
               key={favorite.id} 
               {...favorite} 
               favorite={true}

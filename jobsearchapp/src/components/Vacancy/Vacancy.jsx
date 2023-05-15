@@ -16,7 +16,6 @@ export const Vacancy = (props) => {
         type_of_work_id,
     } = props;
 
-
     const [isFavorite, setIsFavorite] = useState(favorite);
 
     const addToFavorite = () => {
@@ -31,18 +30,18 @@ export const Vacancy = (props) => {
         localStorage.setItem(`${id}`, JSON.stringify(favoriteVacancy));
         setIsFavorite(true);
     };
-        
+
     const removeFromFavorite = () => {
         localStorage.removeItem(`${id}`);
         setIsFavorite(false);
-    };
-
+    }; 
+        
     return (
         <>
             <Paper p="xl">
                 <div className='wrapper-vacancy'>
                     <Title order={4}>
-                        <Link 
+                        <Link
                             to={`/${id}`} 
                             key={id}
                             >{profession}

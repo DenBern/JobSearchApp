@@ -20,6 +20,8 @@ export const Filters = (props) => {
     paymentTo,
     setPaymentTo,
     setActiveBtn,
+    filtersActive,
+    setActiveFilters
   } = useContext(Context);
 
   const {catalogues, getCatalogues} = SuperJob();
@@ -33,6 +35,7 @@ export const Filters = (props) => {
     setCatalogValue(null)
     setPaymentFrom(null)
     setPaymentTo(null)
+    setActiveFilters(false)
   }
 
   return (
@@ -55,12 +58,12 @@ export const Filters = (props) => {
           <p>Отрасль</p>
           <Select
             data={
-                catalogues.map(catalog => {
-                  return {
-                    value: catalog.key,
-                    label: catalog.title_rus,
-                  }
-                })
+              catalogues.map(catalog => {
+                return {
+                  value: catalog.key,
+                  label: catalog.title_rus,
+                }
+              })
             }
             placeholder="Выберете отрасль"
             radius="md"
@@ -77,8 +80,13 @@ export const Filters = (props) => {
             placeholder="От"
             min={0}
             max={paymentTo}
-            onChange={value => setPaymentFrom(value)}
+            onChange={value => {
+                setPaymentFrom(value)
+                setActiveFilters(true)
+              }
+            }
             step={1000}
+            value={paymentFrom ?? ''}
           />
           <NumberInput
             type="number"
@@ -86,11 +94,13 @@ export const Filters = (props) => {
             min={paymentFrom}
             onChange={value => setPaymentTo(value)}
             step={1000}
+            value={paymentTo ?? ''}
           />
         </div>
         <Button
           disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
           onClick={() => {
+              setActiveFilters(true)
               updateFilters(catalogValue, paymentFrom, paymentTo);
               setActiveBtn(true);
             }

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 
 import { Loader } from '@mantine/core';
@@ -12,7 +12,7 @@ export const VacancyDetails = () => {
   const {getVacancyDetails, vacancyDetails, loadVacancy} = SuperJob();
   const {id} = useParams();
   const contentRef = useRef(null);
-  
+
   useEffect(() => {
     getVacancyDetails(id);
     if (contentRef.current) {
@@ -20,9 +20,6 @@ export const VacancyDetails = () => {
     }
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(vacancyDetails.details)
-    
 
   return (
     <>

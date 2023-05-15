@@ -16,13 +16,12 @@ export const Main = () => {
     const {
         getAccessToken, 
         getVacancies, 
-        vacancies, 
+        vacancies,
+        setVacancies, 
         countVacancies, 
         loading,
     } = SuperJob();
     
-    console.log(vacancies)
-
     const [vacancy, setVacancy] = useState([]);
     const [page, setPage] = useState(1);
 
@@ -31,7 +30,9 @@ export const Main = () => {
     const [catalogValue, setCatalogValue] = useState(null);
     const [paymentFrom, setPaymentFrom] = useState(null);
     const [paymentTo, setPaymentTo] = useState(null);
+    const [filtersActive, setActiveFilters] = useState(false);
 
+    const noAgreement = filtersActive ? 1 : 0;
 
     const vacanciesOnThePage = 4;
     const maxAPILimit = 500;
@@ -45,7 +46,7 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page);
+        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page, noAgreement);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [vacancy, page]);
 
@@ -65,6 +66,7 @@ export const Main = () => {
                     paymentFrom, setPaymentFrom,
                     paymentTo, setPaymentTo,
                     activeBtn, setActiveBtn,
+                    setActiveFilters
                 }
             }
         >
@@ -89,7 +91,7 @@ export const Main = () => {
                                 <Skeleton height={8} mt={6} radius="xl" />
                                 <Skeleton height={8} mt={6} width="70%" radius="xl" />
                             </> 
-                            : vacancies.map(vacancy => 
+                            : vacancies.map(vacancy =>
                                     <Vacancy 
                                         key={vacancy.id}  
                                         {...vacancy}
