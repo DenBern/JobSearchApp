@@ -58,6 +58,15 @@ export const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeBtn]); 
 
+    const isFavoriteVacancy = (id) => {
+        const jsonfavs = JSON.parse(localStorage.getItem('favorites'))
+
+        if (!jsonfavs) {
+            return false
+        }
+        // jsonfav.map(vacancy => vacancy.id === id ? true : false)
+    }
+
     return (
         <Context.Provider 
             value={
@@ -95,7 +104,7 @@ export const Main = () => {
                                     <Vacancy 
                                         key={vacancy.id}  
                                         {...vacancy}
-                                        favorite={localStorage.getItem(`${vacancy.id}`) ? true : false}
+                                        favorite={isFavoriteVacancy(vacancy.id)}
                                     />
                             )
                         }

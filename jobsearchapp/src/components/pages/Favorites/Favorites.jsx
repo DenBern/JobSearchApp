@@ -1,32 +1,16 @@
-import { useEffect, useState } from "react";
 import { Vacancy } from "../../Vacancy/Vacancy";
+import { Empty } from "../../Empty/Empty";
 
 import './Favorites.css';
-import { Empty } from "../../Empty/Empty";
 
 export const Favorites = () => {
 
-  const [favorites, setFavorites] = useState([]);
-
-  const favoritesChange = () => {
-    const favorites = [];
-    for (let index = 0; index < localStorage.length; index++) {
-      let key = localStorage.key(index);
-      const favorite = localStorage.getItem(key);
-      const result = JSON.parse(favorite);
-      favorites.push(result);
-    }
-    setFavorites(favorites);
-  };
-
-  useEffect(() => {
-    favoritesChange();
-  }, [])
+  const favorites = JSON.parse(localStorage.getItem('favorites'));
 
   return (
     <>
       <div className="favorites">
-      {favorites.length !== 0 ? 
+      {favorites.length ? 
         (favorites.map(favorite => 
             <Vacancy
               key={favorite.id} 

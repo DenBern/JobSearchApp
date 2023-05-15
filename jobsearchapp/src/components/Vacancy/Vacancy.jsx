@@ -26,6 +26,7 @@ export const Vacancy = (props) => {
             type_of_work,
             town,
             id,
+            favorite,
         };
 
         let favorites = [];
@@ -41,7 +42,10 @@ export const Vacancy = (props) => {
     };
 
     const removeFromFavorite = () => {
-        localStorage.removeItem(`${id}`);
+        const favoritesStorage = localStorage.getItem('favorites');
+        let favorites = JSON.parse(favoritesStorage);
+        favorites = favorites.filter(favorite => favorite.id !== id)
+        localStorage.setItem('favorites', JSON.stringify(favorites))
         setIsFavorite(false);
     }; 
         
