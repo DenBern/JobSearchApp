@@ -27,7 +27,16 @@ export const Vacancy = (props) => {
             town,
             id,
         };
-        localStorage.setItem(`${id}`, JSON.stringify(favoriteVacancy));
+
+        let favorites = [];
+        const favoritesStorage = localStorage.getItem('favorites');
+
+        if (favoritesStorage) {
+            favorites = JSON.parse(favoritesStorage);
+        }
+
+        favorites.push(favoriteVacancy);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
         setIsFavorite(true);
     };
 
@@ -39,7 +48,7 @@ export const Vacancy = (props) => {
     return (
         <>
             <Paper p="xl">
-                <div className='wrapper-vacancy'>
+                <div className="wrapper-vacancy">
                     <Title order={4}>
                         <Link
                             to={`/${id}`} 
@@ -47,20 +56,20 @@ export const Vacancy = (props) => {
                             >{profession}
                         </Link>
                     </Title>
-                    <div className='wrapper'>
+                    <div className="wrapper">
                         <Text fw={700} size="md">
-                        з/п 
-                        {
-                            payment_from && payment_to ? 
-                            ` ${payment_from} - ${payment_to}`
-                            : payment_from && !payment_to ?
-                            ` от ${payment_from}` 
-                            : payment_to && !payment_from ? 
-                            ` до ${payment_to}` 
-                            : ' Не указана'
-                        }
+                            з/п 
+                            {
+                                payment_from && payment_to ? 
+                                ` ${payment_from} - ${payment_to}`
+                                : payment_from && !payment_to ?
+                                ` от ${payment_from}` 
+                                : payment_to && !payment_from ? 
+                                ` до ${payment_to}` 
+                                : " Не указана"
+                            }
                         </Text>
-                        <div className='divider'>
+                        <div className="divider">
                             &bull;
                         </div>
                         <Text fz="md">
@@ -68,8 +77,8 @@ export const Vacancy = (props) => {
                             {type_of_work_id && type_of_work_id}
                         </Text>
                     </div>
-                    <div className='location'>
-                        <div className='icon'/>
+                    <div className="location">
+                        <div className="icon"/>
                         <Text>
                             {town && town.title}
                             {town_id && town_id}
@@ -79,7 +88,7 @@ export const Vacancy = (props) => {
                 <button 
                     type="button"
                     onClick={isFavorite ? removeFromFavorite : addToFavorite}
-                    className={ isFavorite ? 'favoriteActive' : 'favoriteDefault'}
+                    className={ isFavorite ? "favoriteActive" : "favoriteDefault"}
                 />
             </Paper>
         </>

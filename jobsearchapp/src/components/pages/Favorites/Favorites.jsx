@@ -12,7 +12,7 @@ export const Favorites = () => {
     const favorites = [];
     for (let index = 0; index < localStorage.length; index++) {
       let key = localStorage.key(index);
-      const favorite = localStorage.getItem(`${key}`);
+      const favorite = localStorage.getItem(key);
       const result = JSON.parse(favorite);
       favorites.push(result);
     }
@@ -20,7 +20,7 @@ export const Favorites = () => {
   };
 
   useEffect(() => {
-    favoritesChange()
+    favoritesChange();
   }, [])
 
   return (
