@@ -21,7 +21,7 @@ export const Main = () => {
         countVacancies, 
         loading,
     } = SuperJob();
-    
+
     const [vacancy, setVacancy] = useState([]);
     const [page, setPage] = useState(1);
 
@@ -99,7 +99,7 @@ export const Main = () => {
                                 <Skeleton height={8} mt={6} width="70%" radius="xl" />
                             </> 
                             : vacancies.map(vacancy =>
-                                    <Vacancy 
+                                    <Vacancy
                                         key={vacancy.id}  
                                         {...vacancy}
                                         favorite={isFavoriteVacancy(vacancy.id)}
