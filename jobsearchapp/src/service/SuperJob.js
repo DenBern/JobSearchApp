@@ -7,6 +7,7 @@ export const SuperJob = () => {
     const urlVacancies = '/vacancies/?'; 
     const urlCatalogues = '/catalogues/';
     const urlVacancy = '/vacancies/';
+    const countPerPage = 4;
 
     const [vacancies, setVacancies] = useState([]);
     const [vacancyDetails, setVacancyDetails] = useState({});
@@ -47,7 +48,7 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`);
     };
 
-    const getVacancies = async (keyword = '', paymentFrom = 0, paymentTo = undefined, catalogues = [], countPerPage = 4, page, noAgreement = 0) => {
+    const getVacancies = async (keyword = '', paymentFrom = 0, paymentTo = undefined, catalogues = [], page, noAgreement = false) => {
         setLoading(true);
         await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
@@ -56,7 +57,7 @@ export const SuperJob = () => {
             &catalogues=${catalogues}
             &count=${countPerPage}
             &page=${page}
-            &no_agreement=${noAgreement}`,
+            &no_agreement=${+noAgreement}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
@@ -122,6 +123,7 @@ export const SuperJob = () => {
         countVacancies, 
         catalogues,
         loading,
-        loadVacancy
+        loadVacancy,
+        countPerPage,
     }
 }

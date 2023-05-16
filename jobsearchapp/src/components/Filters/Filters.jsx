@@ -13,6 +13,8 @@ export const Filters = (props) => {
   const { updateFilters } = props;
 
   const {
+    page,
+    setPage,
     catalogValue, 
     setCatalogValue, 
     paymentFrom, 
@@ -20,7 +22,6 @@ export const Filters = (props) => {
     paymentTo,
     setPaymentTo,
     setActiveBtn,
-    filtersActive,
     setActiveFilters
   } = useContext(Context);
 
@@ -36,7 +37,17 @@ export const Filters = (props) => {
     setPaymentFrom(null)
     setPaymentTo(null)
     setActiveFilters(false)
+    setPage(1)
   }
+
+  const applyFilters = () => {
+    page !== 1 && setPage(1);
+    setActiveFilters(true);
+    updateFilters(catalogValue, paymentFrom, paymentTo);
+    setActiveBtn(true);
+  }
+
+  const isButtonApplyDisabled = catalogValue || paymentFrom || paymentTo;
 
   return (
     <div className="wrapperfilters">
@@ -44,7 +55,7 @@ export const Filters = (props) => {
         <div className="title-filters">
           <h3>Фильтры</h3>
           <button
-            disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
+            disabled={!isButtonApplyDisabled}
             onClick={clearFilters}
             className="reset-all">
             Сбросить все
@@ -65,7 +76,7 @@ export const Filters = (props) => {
                 }
               })
             }
-            placeholder="Выберете отрасль"
+            placeholder="Выберите отрасль"
             radius="md"
             size="md"
             limit={2}
@@ -80,11 +91,7 @@ export const Filters = (props) => {
             placeholder="От"
             min={0}
             max={paymentTo}
-            onChange={value => {
-                setPaymentFrom(value)
-                setActiveFilters(true)
-              }
-            }
+            onChange={value => setPaymentFrom(value)}
             step={1000}
             value={paymentFrom ?? ''}
           />
@@ -98,13 +105,9 @@ export const Filters = (props) => {
           />
         </div>
         <Button
-          disabled={(catalogValue || paymentFrom || paymentTo) ? false : true}
-          onClick={() => {
-              setActiveFilters(true)
-              updateFilters(catalogValue, paymentFrom, paymentTo);
-              setActiveBtn(true);
-            }
-          }>
+          disabled={!isButtonApplyDisabled}
+          onClick={applyFilters}
+        >
           Применить
         </Button>
       </div>

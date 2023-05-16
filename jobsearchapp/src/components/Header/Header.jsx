@@ -1,8 +1,12 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useSearchParams } from "react-router-dom"
 
 import './Header.css';
 
 export const Header = () => {
+  const [searchParams] = useSearchParams();
+
+  const activePage = searchParams.get('page') && `?page=${searchParams.get('page')}`;
+
   return (
     <div className="header">
     <div className="container">
@@ -21,7 +25,7 @@ export const Header = () => {
                     }
                   )
                 } 
-              to="/"
+              to={`/${activePage}`}
               >Поиск Вакансий
             </NavLink>
           </div>
@@ -35,7 +39,7 @@ export const Header = () => {
                     }
                   )
                 } 
-              to="/favorite"
+              to={`/favorite${activePage}`}
               >Избранное
             </NavLink>
           </div>

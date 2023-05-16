@@ -14,7 +14,6 @@ export const Vacancy = (props) => {
         id,
         town_id,
         type_of_work_id,
-        isFavoriteVacancy
     } = props;
 
     const [isFavorite, setIsFavorite] = useState(favorite);

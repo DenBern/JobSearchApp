@@ -8,39 +8,38 @@ import { Context } from "../../../context";
 
 import { Skeleton } from "@mantine/core";
 import { Pagination } from '@mantine/core';
-
+import { useSearchParams } from "react-router-dom";
 import  './Main.css';
 
 export const Main = () => {
-
     const {
         getAccessToken, 
         getVacancies, 
         vacancies,
-        setVacancies, 
         countVacancies, 
         loading,
+        countPerPage,
     } = SuperJob();
 
-    const [vacancy, setVacancy] = useState([]);
-    const [page, setPage] = useState(1);
+    let [searchParams, setSearchParams] = useSearchParams();
+
+
+    const [vacancy, setVacancy] = useState('');
+    const [page, setPage] = useState(+searchParams.get('page') || 1);
 
     const [activeBtn, setActiveBtn] = useState(false)
     
     const [catalogValue, setCatalogValue] = useState(null);
     const [paymentFrom, setPaymentFrom] = useState(null);
     const [paymentTo, setPaymentTo] = useState(null);
-    const [filtersActive, setActiveFilters] = useState(false);
+    const [activeFilters, setActiveFilters] = useState(false);
 
-    const noAgreement = filtersActive ? 1 : 0;
-
-    const vacanciesOnThePage = 4;
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit 
-        ? Math.ceil(countVacancies / vacanciesOnThePage) 
-        : Math.ceil(maxAPILimit / vacanciesOnThePage);
+        ? Math.ceil(countVacancies / countPerPage) 
+        : Math.ceil(maxAPILimit / countPerPage);
 
-    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    const favoritesStorage = JSON.parse(localStorage.getItem('favorites'));
 
     useEffect(() => {
         getAccessToken();
@@ -48,21 +47,13 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page, noAgreement);
+        getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, activeFilters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [vacancy, page]);
-
-    useEffect(() => {
-        if (activeBtn) {
-            page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page, noAgreement) : setPage(1);
-            setActiveBtn(false)
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeBtn]); 
+    }, [vacancy, page, activeFilters]);
 
     const isFavoriteVacancy = (id) => {
-        const trueVacs = favorites.filter(favorite => favorite.id === id)
-        return trueVacs.length > 0;
+        const filteredVacancies = favoritesStorage.filter(favorite => favorite.id === id);
+        return filteredVacancies.length > 0;
     }
 
     return (
@@ -73,7 +64,8 @@ export const Main = () => {
                     paymentFrom, setPaymentFrom,
                     paymentTo, setPaymentTo,
                     activeBtn, setActiveBtn,
-                    setActiveFilters
+                    activeFilters, setActiveFilters,
+                    page, setPage,
                 }
             }
         >
@@ -110,8 +102,13 @@ export const Main = () => {
                     {countVacancies > 4 && 
                         (
                             <Pagination 
+                                defaultValue={page}
                                 value={page}
-                                onChange={setPage} 
+                                onChange={(page) => {
+                                        setPage(page)
+                                        setSearchParams(`page=${page}`)
+                                    }
+                                }
                                 total={pages}
                             />
                         )
