@@ -48,7 +48,7 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`);
     };
 
-    const getVacancies = async (keyword = '', paymentFrom = 0, paymentTo = undefined, catalogues = [], page, noAgreement = false) => {
+    const getVacancies = async (keyword = '', paymentFrom = 0, paymentTo = undefined, catalogues = [], page) => {
         setLoading(true);
         await getData(`${URL}${urlVacancies}published=1
             &keyword=${keyword}
@@ -56,8 +56,7 @@ export const SuperJob = () => {
             &payment_to=${paymentTo}
             &catalogues=${catalogues}
             &count=${countPerPage}
-            &page=${page}
-            &no_agreement=${+noAgreement}`,
+            &page=${page}`,
                 {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,

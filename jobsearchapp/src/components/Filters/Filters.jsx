@@ -50,7 +50,7 @@ export const Filters = (props) => {
   const isButtonApplyDisabled = catalogValue || paymentFrom || paymentTo;
 
   return (
-    <div className="wrapperfilters">
+    <div className="wrapper-filters">
       <div className="filters">
         <div className="title-filters">
           <h3>Фильтры</h3>
