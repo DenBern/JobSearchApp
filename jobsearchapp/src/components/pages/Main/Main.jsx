@@ -40,6 +40,8 @@ export const Main = () => {
         ? Math.ceil(countVacancies / vacanciesOnThePage) 
         : Math.ceil(maxAPILimit / vacanciesOnThePage);
 
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+
     useEffect(() => {
         getAccessToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,19 +54,15 @@ export const Main = () => {
 
     useEffect(() => {
         if (activeBtn) {
-            page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page) : setPage(1);
+            page === 1 ? getVacancies(vacancy, paymentFrom , paymentTo, catalogValue, vacanciesOnThePage, page, noAgreement) : setPage(1);
             setActiveBtn(false)
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeBtn]); 
 
     const isFavoriteVacancy = (id) => {
-        const jsonfavs = JSON.parse(localStorage.getItem('favorites'))
-
-        if (!jsonfavs) {
-            return false
-        }
-        // jsonfav.map(vacancy => vacancy.id === id ? true : false)
+        const trueVacs = favorites.filter(favorite => favorite.id === id)
+        return trueVacs.length > 0;
     }
 
     return (

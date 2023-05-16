@@ -17,7 +17,7 @@ export const Vacancy = (props) => {
     } = props;
 
     const [isFavorite, setIsFavorite] = useState(favorite);
-
+    
     const addToFavorite = () => {
         const favoriteVacancy = {
             profession,
