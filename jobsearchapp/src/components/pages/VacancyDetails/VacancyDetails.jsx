@@ -27,7 +27,7 @@ export const VacancyDetails = () => {
     <>
       {loadVacancy ? <Loader/> : (
           <div className="details-wrapper">
-            <Vacancy {...vacancyDetails}/>
+            <Vacancy {...vacancyDetails} favorite={true}/>
             {/* <div className="vacancy-details" ref={contentRef}/> */}
             <TypographyStylesProvider>
               <div 
