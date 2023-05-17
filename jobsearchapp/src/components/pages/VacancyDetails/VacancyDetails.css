@@ -1,23 +1,26 @@
-.details {
+.details-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 48.313rem;
 }
-.vacancy-details {
+
+.details-all {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* .vacancy-details {
   padding: 24px;
   background-color: #fff;
   border-radius: 12px;
-}
+} */
 
-.vacancy-details p {
+/* .vacancy-details p {
   font-weight: 700;
   padding-top: 10px;
-}
-
-ul {
-  padding-left: 15px;
-}
+} */
 
 li {
   font-family: 'Inter', sans-serif;
@@ -25,7 +28,11 @@ li {
   font-weight: 400;
   cursor: auto;
 }
+/* ul {
+  padding-left: 15px;
+}
+
 
 br {
   height: 0px;
-}
+} */

@@ -6,9 +6,11 @@ import { VacancyDetails } from '../pages/VacancyDetails/VacancyDetails';
 import { Favorites } from '../pages/Favorites/Favorites';
 
 import './App.css';
+import { SuperJob } from '../../service/SuperJob';
 
 export const App = () => {
 
+    const {vacancyDetails} = SuperJob();
     return (
         <>
             <Router>
@@ -16,7 +18,7 @@ export const App = () => {
                     <main>
                         <Routes>
                             <Route path="*" element={<Main/>}/>
-                            <Route path="/:id" element={<VacancyDetails/>}/>
+                            <Route path="/:id" element={<VacancyDetails vacancyDetails={vacancyDetails}/>}/>
                             <Route path="/favorite" element={<Favorites/>}/>
                         </Routes>
                     </main>

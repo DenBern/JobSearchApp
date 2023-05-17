@@ -17,7 +17,7 @@ export const SuperJob = () => {
     const [loading, setLoading] = useState(false);
     const [loadVacancy, setLoadVacancy] = useState(false)
     
-    // const tokenSave = 'v3.r.137440105.b59ef02f1f3eed03ff3922bfc7caa36d25e70814.96d2d5461f64f9feefb4ed225fa025586dc61349';
+    // const tokenSave = 'v3.r.137440105.88868155de00f085b669ba7944421ce8dede25db.a69ca8815874fc60c757223804ec907ded5a821e';
     const credits = {
         login: 'login=sergei.stralenia@gmail.com',
         password: 'password=paralect123',

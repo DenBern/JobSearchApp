@@ -5,7 +5,7 @@ import './Header.css';
 export const Header = () => {
   const [searchParams] = useSearchParams();
 
-  const activePage = searchParams.get('page') && `?page=${searchParams.get('page')}`;
+  const activePage = +searchParams.get('page') && `?page=${searchParams.get('page')}`;
 
   return (
     <div className="header">
@@ -25,7 +25,7 @@ export const Header = () => {
                     }
                   )
                 } 
-              to={`/${activePage}`}
+              to={`/?page=${activePage}`}
               >Поиск Вакансий
             </NavLink>
           </div>
@@ -39,7 +39,7 @@ export const Header = () => {
                     }
                   )
                 } 
-              to={`/favorite${activePage}`}
+              to={`/favorite`}
               >Избранное
             </NavLink>
           </div>
