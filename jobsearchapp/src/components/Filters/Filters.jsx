@@ -4,17 +4,15 @@ import { Select } from "@mantine/core";
 import { NumberInput } from '@mantine/core';
 import { Button } from '@mantine/core';
 
-import { Context } from "../../context";
+import { Context } from "../../Context";
 
 import './Filters.css';
 
 export const Filters = (props) => {
 
-  const { updateFilters } = props;
+  const { updateFilters, page, setPage } = props;
 
   const {
-    page,
-    setPage,
     catalogValue, 
     setCatalogValue, 
     paymentFrom, 

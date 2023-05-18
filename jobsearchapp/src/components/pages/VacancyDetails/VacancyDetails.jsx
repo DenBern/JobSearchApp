@@ -11,7 +11,6 @@ import './VacancyDetails.css';
 
 export const VacancyDetails = () => {
 
-
   const {getVacancyDetails, vacancyDetails, loadVacancy} = SuperJob();
   const {id} = useParams();
   // const contentRef = useRef(null);
@@ -27,7 +26,7 @@ export const VacancyDetails = () => {
     <>
       {loadVacancy ? <Loader/> : (
           <div className="details-wrapper">
-            <Vacancy {...vacancyDetails} favorite={true}/>
+            <Vacancy {...vacancyDetails}/>
             {/* <div className="vacancy-details" ref={contentRef}/> */}
             <TypographyStylesProvider>
               <div 

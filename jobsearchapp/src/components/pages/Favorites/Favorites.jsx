@@ -7,52 +7,37 @@ import { SuperJob } from "../../../service/SuperJob";
 import './Favorites.css';
 
 export const Favorites = () => {
-
-  const storageFavorites = JSON.parse(localStorage.getItem('favorites'));
+  
   const {countPerPage} = SuperJob();
-
   const [activePage, setActivePage] = useState(1);
+  
+  const storageFavorites = JSON.parse(localStorage.getItem('favorites'));
+  const coutStorageVacancies = storageFavorites.length;
+  const startCountVacancies = (activePage - 1) * countPerPage;
+  const endVCountVacancies = startCountVacancies + countPerPage;
+  const onCurrentPageVacancies = storageFavorites.slice(startCountVacancies, endVCountVacancies);
 
-  const renderVacancies = () => {
-    const startCountVacancies = (activePage - 1) * countPerPage;
-    const endVCountVacancies = startCountVacancies + countPerPage;
-    const onCurrentPageVacancies = storageFavorites.slice(startCountVacancies, endVCountVacancies);
-
+  const showVacancies = () => {
     return onCurrentPageVacancies.map((favorite) => (
       <Vacancy 
-        key={favorite.id} 
-        {...favorite} 
+        key={favorite.id}
+        {...favorite}
         favorite={true}
       />
     ));
   };
 
   return (
-    <>
+    <div className="wrapper-favorites">
       <div className="favorites">
-        {/* {storageFavorites.length >= countPerPage ? 
-          // eslint-disable-next-line array-callback-return
-          (storageFavorites.map((favorite, index) => {
-              if (index < countPerPage) {
-                return (
-                  <Vacancy
-                    key={favorite.id} 
-                    {...favorite} 
-                    favorite={true}
-                  />
-                )
-              }
-            })
-          )
-            : <Empty/>
-        } */}
-        {storageFavorites.length >= countPerPage ? renderVacancies() : <Empty />}
+        {!coutStorageVacancies && <Empty/>}
+        {showVacancies()}
+      </div>
       <Pagination 
         value={activePage} 
         onChange={(activePage) => setActivePage(activePage)}
         total={Math.ceil(storageFavorites.length / countPerPage)} 
       />
-      </div>
-    </>
+    </div>
   )
 }

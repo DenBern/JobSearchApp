@@ -5,20 +5,19 @@ import { Main } from '../pages/Main/Main';
 import { VacancyDetails } from '../pages/VacancyDetails/VacancyDetails';
 import { Favorites } from '../pages/Favorites/Favorites';
 
+import { Context, MainContextProvider } from '../../Context';
+
 import './App.css';
-import { SuperJob } from '../../service/SuperJob';
 
 export const App = () => {
-
-    const {vacancyDetails} = SuperJob();
     return (
         <>
             <Router>
                 <Header />
                     <main>
                         <Routes>
-                            <Route path="*" element={<Main/>}/>
-                            <Route path="/:id" element={<VacancyDetails vacancyDetails={vacancyDetails}/>}/>
+                            <Route path="*" element={<MainContextProvider/>}/>
+                            <Route path="/:id" element={<VacancyDetails/>}/>
                             <Route path="/favorite" element={<Favorites/>}/>
                         </Routes>
                     </main>

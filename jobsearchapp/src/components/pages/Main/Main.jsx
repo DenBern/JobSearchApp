@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 import { Search } from "../../Search/Search";
 import { Vacancy } from "../../Vacancy/Vacancy";
 import { Filters } from "../../Filters/Filters";
 
-import { Context } from "../../../context";
+import { Context } from "../../../Context";
 
 import { Skeleton } from "@mantine/core";
 import { Pagination } from '@mantine/core';
@@ -21,18 +21,29 @@ export const Main = () => {
         countPerPage,
     } = SuperJob();
 
-    let [searchParams, setSearchParams] = useSearchParams();
-
+    const {
+        activeBtn,
+        setActiveBtn,
+        catalogValue,
+        setCatalogValue,
+        paymentFrom,
+        setPaymentFrom,
+        paymentTo,
+        setPaymentTo,
+        activeFilters,
+        setActiveFilters,
+    } = useContext(Context);
 
     const [vacancy, setVacancy] = useState('');
+    let [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(+searchParams.get('page') || 1);
 
-    const [activeBtn, setActiveBtn] = useState(false)
+    // const [activeBtn, setActiveBtn] = useState(false)
     
-    const [catalogValue, setCatalogValue] = useState(null);
-    const [paymentFrom, setPaymentFrom] = useState(null);
-    const [paymentTo, setPaymentTo] = useState(null);
-    const [activeFilters, setActiveFilters] = useState(false);
+    // const [catalogValue, setCatalogValue] = useState(null);
+    // const [paymentFrom, setPaymentFrom] = useState(null);
+    // const [paymentTo, setPaymentTo] = useState(null);
+    // const [activeFilters, setActiveFilters] = useState(false);
 
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit 
@@ -57,18 +68,7 @@ export const Main = () => {
     }
 
     return (
-        <Context.Provider 
-            value={
-                {
-                    catalogValue,setCatalogValue, 
-                    paymentFrom, setPaymentFrom,
-                    paymentTo, setPaymentTo,
-                    activeBtn, setActiveBtn,
-                    activeFilters, setActiveFilters,
-                    page, setPage,
-                }
-            }
-        >
+        
             <>
                 <Filters
                     updateFilters={(catalogValue, paymentFrom, paymentTo) => {
@@ -77,6 +77,8 @@ export const Main = () => {
                             setPaymentTo(paymentTo)
                         }
                     }
+                    page={page}
+                    setPage={setPage}
                 />
                 <div className="search-content">
                     <Search 
@@ -115,6 +117,5 @@ export const Main = () => {
                     }
                 </div>
             </>
-        </Context.Provider>
     )
 }
