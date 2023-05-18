@@ -10,16 +10,15 @@ import './Filters.css';
 
 export const Filters = (props) => {
 
-  const { updateFilters, page, setPage } = props;
+  const { setPage, setPaginationPage, setSearchParams } = props;
 
   const {
     catalogValue, 
-    setCatalogValue, 
+    setCatalogValue,
     paymentFrom, 
     setPaymentFrom,
     paymentTo,
     setPaymentTo,
-    setActiveBtn,
     setActiveFilters
   } = useContext(Context);
 
@@ -28,21 +27,39 @@ export const Filters = (props) => {
   useEffect(() => {
     getCatalogues();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
+
+  const changeFilter = (value, type) => {
+    setActiveFilters(false);
+    switch (type) {
+        case 'catalog': 
+            setCatalogValue(value);
+            break;
+        case 'from':
+            setPaymentFrom(value);
+            break;
+        case 'to': 
+            setPaymentTo(value);
+            break;
+        default: 
+            break;
+    }
+}
 
   const clearFilters = () => {
-    setCatalogValue(null)
-    setPaymentFrom(null)
-    setPaymentTo(null)
-    setActiveFilters(false)
-    setPage(1)
+    setCatalogValue(null);
+    setPaymentFrom(null);
+    setPaymentTo(null);
+    setActiveFilters(false);
+    setPage(1);
+    setPaginationPage(1);
+    setSearchParams(`page=${1}`);
   }
 
   const applyFilters = () => {
-    page !== 1 && setPage(1);
+    setPaginationPage(1);
+    setSearchParams(`page=${1}`);
     setActiveFilters(true);
-    updateFilters(catalogValue, paymentFrom, paymentTo);
-    setActiveBtn(true);
   }
 
   const isButtonApplyDisabled = catalogValue || paymentFrom || paymentTo;
@@ -79,7 +96,7 @@ export const Filters = (props) => {
             size="md"
             limit={2}
             value={catalogValue} 
-            onChange={setCatalogValue}
+            onChange={(value) => changeFilter(value, 'catalog')}
           />
         </div>
         <div className="wrapper-salary">
@@ -89,7 +106,7 @@ export const Filters = (props) => {
             placeholder="От"
             min={0}
             max={paymentTo}
-            onChange={value => setPaymentFrom(value)}
+            onChange={(value) => changeFilter(value, 'from')}
             step={1000}
             value={paymentFrom ?? ''}
           />
@@ -97,7 +114,7 @@ export const Filters = (props) => {
             type="number"
             placeholder="До"
             min={paymentFrom}
-            onChange={value => setPaymentTo(value)}
+            onChange={(value) => changeFilter(value, 'to')}
             step={1000}
             value={paymentTo ?? ''}
           />

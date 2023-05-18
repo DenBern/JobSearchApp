@@ -17,7 +17,7 @@ export const SuperJob = () => {
     const [loading, setLoading] = useState(false);
     const [loadVacancy, setLoadVacancy] = useState(false)
     
-    const tokenSave = 'v3.r.137440105.88868155de00f085b669ba7944421ce8dede25db.a69ca8815874fc60c757223804ec907ded5a821e';
+    // const tokenSave = 'v3.r.137440105.88868155de00f085b669ba7944421ce8dede25db.a69ca8815874fc60c757223804ec907ded5a821e';
     const credits = {
         login: 'login=sergei.stralenia@gmail.com',
         password: 'password=paralect123',
@@ -35,7 +35,7 @@ export const SuperJob = () => {
     };
 
     const getAccessToken = async () => {
-        if (sessionStorage.getItem('token')) return
+        if (sessionStorage.getItem('token')) return;
         const token = 
             await getData(`${URL}${urlPassword}${credits.login}&${credits.password}&${credits.client_id}&${credits.client_secret}&${credits.hr}`, 
                 {
@@ -48,7 +48,7 @@ export const SuperJob = () => {
         sessionStorage.setItem('token', `${token.access_token}`);
     };
 
-    const getVacancies = async (keyword = '', paymentFrom = 0, paymentTo = undefined, catalogues = [], page) => {
+    const getVacancies = async (keyword = '', paymentFrom = undefined, paymentTo = undefined, catalogues = [], page) => {
         setLoading(true);
         await getData(`${URL}${urlVacancies}
             published=1
@@ -60,7 +60,7 @@ export const SuperJob = () => {
             &page=${page}`,
                 {
                     headers: {
-                        'Authorization': `Bearer ${sessionStorage.getItem('token')} ` && `Bearer ${tokenSave}`,
+                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
                         'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
                         'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
                     }

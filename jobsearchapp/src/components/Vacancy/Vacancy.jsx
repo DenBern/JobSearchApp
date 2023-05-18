@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Text, Paper, Title } from '@mantine/core';
 import { useState } from 'react';
+
 import './Vacancy.css';
 
 export const Vacancy = (props) => {
@@ -47,8 +48,8 @@ export const Vacancy = (props) => {
         favorites = favorites.filter(favorite => favorite.id !== id)
         localStorage.setItem('favorites', JSON.stringify(favorites))
         setIsFavorite(false);
-    }; 
-        
+    };
+
     return (
         <>
             <Paper p="xl">

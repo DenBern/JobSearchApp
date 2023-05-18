@@ -1,11 +1,10 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import { Header } from '../Header/Header';
-import { Main } from '../pages/Main/Main';
 import { VacancyDetails } from '../pages/VacancyDetails/VacancyDetails';
 import { Favorites } from '../pages/Favorites/Favorites';
 
-import { Context, MainContextProvider } from '../../Context';
+import { MainContextProvider } from '../../Context';
 
 import './App.css';
 

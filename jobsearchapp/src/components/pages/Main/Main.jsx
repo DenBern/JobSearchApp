@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 import { Search } from "../../Search/Search";
 import { Vacancy } from "../../Vacancy/Vacancy";
@@ -22,23 +22,16 @@ export const Main = () => {
     } = SuperJob();
 
     const {
-        activeBtn,
-        setActiveBtn,
         catalogValue,
-        setCatalogValue,
         paymentFrom,
-        setPaymentFrom,
         paymentTo,
-        setPaymentTo,
         activeFilters,
-        setActiveFilters,
     } = useContext(Context);
 
     const [vacancy, setVacancy] = useState('');
     let [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(+searchParams.get('page') || 1);
-
-    // const [activeBtn, setActiveBtn] = useState(false)
+    const [paginationPage, setPaginationPage] = useState(+searchParams.get('page') || 1);
     
     // const [catalogValue, setCatalogValue] = useState(null);
     // const [paymentFrom, setPaymentFrom] = useState(null);
@@ -58,9 +51,15 @@ export const Main = () => {
     }, []);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, activeFilters);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [vacancy, page, activeFilters]);
+        console.log(activeFilters)
+        if (activeFilters) {
+            getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 1);
+        } 
+    }, [activeFilters]);
+
+    useEffect(() => {
+        getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page);
+    }, [vacancy, page]);
 
     const isFavoriteVacancy = (id) => {
         const filteredVacancies = favoritesStorage.filter(favorite => favorite.id === id);
@@ -68,16 +67,10 @@ export const Main = () => {
     }
 
     return (
-        
             <>
                 <Filters
-                    updateFilters={(catalogValue, paymentFrom, paymentTo) => {
-                            setCatalogValue(catalogValue)
-                            setPaymentFrom(paymentFrom)
-                            setPaymentTo(paymentTo)
-                        }
-                    }
-                    page={page}
+                    setSearchParams={setSearchParams}
+                    setPaginationPage={setPaginationPage}
                     setPage={setPage}
                 />
                 <div className="search-content">
@@ -104,11 +97,12 @@ export const Main = () => {
                     {countVacancies > 4 && 
                         (
                             <Pagination 
-                                defaultValue={page}
-                                value={page}
+                                defaultValue={paginationPage}
+                                value={paginationPage}
                                 onChange={(page) => {
-                                        setPage(page)
-                                        setSearchParams(`page=${page}`)
+                                        setPaginationPage(page);
+                                        setPage(page);
+                                        setSearchParams(`page=${page}`);
                                     }
                                 }
                                 total={pages}

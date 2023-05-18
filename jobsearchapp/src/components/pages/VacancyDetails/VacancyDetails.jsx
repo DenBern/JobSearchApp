@@ -13,13 +13,9 @@ export const VacancyDetails = () => {
 
   const {getVacancyDetails, vacancyDetails, loadVacancy} = SuperJob();
   const {id} = useParams();
-  // const contentRef = useRef(null);
 
   useEffect(() => {
     getVacancyDetails(id);
-    // if (contentRef.current) {
-    //   contentRef.current.innerHTML = `${vacancyDetails.details}`;
-    // }
   }, [id]);
 
   return (
@@ -27,7 +23,6 @@ export const VacancyDetails = () => {
       {loadVacancy ? <Loader/> : (
           <div className="details-wrapper">
             <Vacancy {...vacancyDetails}/>
-            {/* <div className="vacancy-details" ref={contentRef}/> */}
             <TypographyStylesProvider>
               <div 
                 dangerouslySetInnerHTML={{ __html: `${vacancyDetails.details}` }} 

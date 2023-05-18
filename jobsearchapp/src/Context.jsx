@@ -6,7 +6,6 @@ export const Context = React.createContext();
 
 export const MainContextProvider = () => {
 
-    const [activeBtn, setActiveBtn] = useState(false);
     const [catalogValue, setCatalogValue] = useState(null);
     const [paymentFrom, setPaymentFrom] = useState(null);
     const [paymentTo, setPaymentTo] = useState(null);
@@ -16,8 +15,6 @@ export const MainContextProvider = () => {
         <Context.Provider
             value={
                 {
-                    activeBtn,
-                    setActiveBtn,
                     catalogValue,
                     setCatalogValue,
                     paymentFrom,

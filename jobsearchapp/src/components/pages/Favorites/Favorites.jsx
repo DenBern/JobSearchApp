@@ -17,9 +17,11 @@ export const Favorites = () => {
   const endVCountVacancies = startCountVacancies + countPerPage;
   const onCurrentPageVacancies = storageFavorites.slice(startCountVacancies, endVCountVacancies);
 
+
+  
   const showVacancies = () => {
     return onCurrentPageVacancies.map((favorite) => (
-      <Vacancy 
+      <Vacancy
         key={favorite.id}
         {...favorite}
         favorite={true}
