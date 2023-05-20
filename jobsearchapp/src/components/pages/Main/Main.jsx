@@ -32,7 +32,7 @@ export const Main = () => {
     let [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(+searchParams.get('page') || 1);
     const [paginationPage, setPaginationPage] = useState(+searchParams.get('page') || 1);
-    
+
     // const [catalogValue, setCatalogValue] = useState(null);
     // const [paymentFrom, setPaymentFrom] = useState(null);
     // const [paymentTo, setPaymentTo] = useState(null);
@@ -44,6 +44,7 @@ export const Main = () => {
         : Math.ceil(maxAPILimit / countPerPage);
 
     const favoritesStorage = JSON.parse(localStorage.getItem('favorites'));
+    const noAgreement = activeFilters ? 1 : null;
 
     useEffect(() => {
         getAccessToken();
@@ -53,13 +54,17 @@ export const Main = () => {
     useEffect(() => {
         console.log(activeFilters)
         if (activeFilters) {
-            getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 1);
+            getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 1, noAgreement);
         } 
     }, [activeFilters]);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page);
-    }, [vacancy, page]);
+        getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
+    }, [page]);
+
+    useContext(() => {
+        setPage(1)
+    }, [vacancy])
 
     const isFavoriteVacancy = (id) => {
         const filteredVacancies = favoritesStorage.filter(favorite => favorite.id === id);

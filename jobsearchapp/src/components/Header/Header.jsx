@@ -25,7 +25,7 @@ export const Header = () => {
                     }
                   )
                 } 
-              to={`/?page=${activePage}`}
+              to={`/?page=${1}`}
               >Поиск Вакансий
             </NavLink>
           </div>
