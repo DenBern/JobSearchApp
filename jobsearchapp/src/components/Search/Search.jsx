@@ -4,11 +4,11 @@ import { TextInput, Button } from '@mantine/core';
 import './Search.css';
 
 export const Search = (props) => {
-    const {updateVacancy, updatePage} = props;
+
+    const {updateVacancy} = props;
     const [search, setSearch] = useState('');
 
     const handlesearch = () => {
-        updatePage(1);
         updateVacancy(search);
     };
 

@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
-import { Text, Paper, Title } from '@mantine/core';
-import { useState } from 'react';
+import { Link } from "react-router-dom";
+import { Text, Paper, Title } from "@mantine/core";
+import { useContext, useState } from "react";
 
 import './Vacancy.css';
+import { Context } from "../../Context";
 
 export const Vacancy = (props) => {
     const {
@@ -11,43 +12,21 @@ export const Vacancy = (props) => {
         payment_to, 
         type_of_work, 
         town,
-        favorite,
         id,
         town_id,
         type_of_work_id,
+        favorite,
     } = props;
 
-    const [isFavorite, setIsFavorite] = useState(favorite);
-    
-    const addToFavorite = () => {
-        const favoriteVacancy = {
-            profession,
-            payment_from,
-            payment_to,
-            type_of_work,
-            town,
-            id,
-            favorite,
-        };
+    const {addToFavorite, removeFromFavorite} = useContext(Context);
 
-        let favorites = [];
-        const favoritesStorage = localStorage.getItem('favorites');
-
-        if (favoritesStorage) {
-            favorites = JSON.parse(favoritesStorage);
-        }
-
-        favorites.push(favoriteVacancy);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        setIsFavorite(true);
-    };
-
-    const removeFromFavorite = () => {
-        const favoritesStorage = localStorage.getItem('favorites');
-        let favorites = JSON.parse(favoritesStorage);
-        favorites = favorites.filter(favorite => favorite.id !== id)
-        localStorage.setItem('favorites', JSON.stringify(favorites))
-        setIsFavorite(false);
+    const favoriteVacancy = {
+        profession,
+        payment_from,
+        payment_to,
+        type_of_work,
+        town,
+        id,
     };
 
     return (
@@ -92,8 +71,8 @@ export const Vacancy = (props) => {
                 </div>
                 <button 
                     type="button"
-                    onClick={isFavorite ? removeFromFavorite : addToFavorite}
-                    className={ isFavorite ? "favoriteActive" : "favoriteDefault"}
+                    onClick={favorite ? removeFromFavorite(id) : addToFavorite(favoriteVacancy)}
+                    className={favorite ? "favoriteActive" : "favoriteDisabled"}
                 />
             </Paper>
         </>

@@ -44,14 +44,14 @@ export const Filters = (props) => {
         default: 
             break;
     }
-}
+  }
 
   const clearFilters = () => {
     setCatalogValue(null);
     setPaymentFrom(null);
     setPaymentTo(null);
     setActiveFilters(false);
-    setPage(1);
+    setPage(0);
     setPaginationPage(1);
     setSearchParams(`page=${1}`);
   }

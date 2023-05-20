@@ -69,7 +69,7 @@ export const SuperJob = () => {
         .then(vacancies => {
             setVacancies([...vacancies.objects]);
             setCountVacancies(vacancies.total);
-            setLoading(false)
+            setLoading(false);
         })
     }
 
@@ -96,7 +96,7 @@ export const SuperJob = () => {
                     id: vacancy.id,
                 }
             );
-            setLoadVacancy(false)
+            setLoadVacancy(false);
         })
     }
 

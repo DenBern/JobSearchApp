@@ -50,7 +50,7 @@
   color: #7B7C88;
 }
 
-.favoriteDefault {
+.favoriteDisabled {
   width: 24px;
   height: 24px;
   background: url(../../assets/png/starDefault.png) no-repeat;
@@ -58,7 +58,7 @@
   border: none;
 }
 
-.favoriteDefault:hover {
+.favoriteDisabled:hover {
   cursor: pointer;
   background: url(../../assets/png/starHover.png) no-repeat;
 }

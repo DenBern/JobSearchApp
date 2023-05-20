@@ -33,12 +33,6 @@
   padding: 20px;
 }
 
-.search-content {
-  width: 48.313rem;
-  display: flex;
-  flex-direction: column;
-}
-
 .selected {
   background-color: #5E96FC;
   color: #eee;
