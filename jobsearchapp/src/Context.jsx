@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Main } from "./components/pages/Main/Main";
-import {VacancyDetails} from "./components/pages/VacancyDetails/VacancyDetails";
 import { Favorites } from "./components/pages/Favorites/Favorites";
 
 export const Context = React.createContext();
 
-const favoritesStorage = JSON.parse(localStorage.getItem('favorites')) ?? false;
 const isFavoriteVacancy = (id) => {
-    if (favoritesStorage === null) {
-        return false
-    }
-    // } else {
-    //     const filteredVacancies = favoritesStorage.filter(favorite => favorite.id === id);
-    //     return filteredVacancies.length > 0;
-    // }
+    const favoritesStorageString = localStorage.getItem('favorites');
+    const filteredVacancies = (favoritesStorageString === null)  ? [] : JSON.parse(favoritesStorageString).filter(favorite => favorite.id === id);
+    return filteredVacancies.length >= 1;
 }
 
 const addToFavorite = (favoriteVacancy) => {
+    console.log('active in context')
+    const favoritesStorageString = localStorage.getItem('favorites');
     let favorites = [];
-    const favoritesStorage = localStorage.getItem('favorites');
 
-    if (favoritesStorage) {
-        favorites = JSON.parse(favoritesStorage);
+    if (favoritesStorageString !== null) {
+        favorites = JSON.parse(favoritesStorageString);
     }
 
     favorites.push(favoriteVacancy);
@@ -30,10 +25,11 @@ const addToFavorite = (favoriteVacancy) => {
 };
 
 const removeFromFavorite = (id) => {
-    const favoritesStorage = localStorage.getItem('favorites');
-    let favorites = JSON.parse(favoritesStorage);
-    favorites = favorites.filter(favorite => favorite.id !== id)
-    localStorage.setItem('favorites', JSON.stringify(favorites))
+    console.log('disabled in context')
+    const favoritesStorageString = localStorage.getItem('favorites');
+    let favorites = JSON.parse(favoritesStorageString);
+    favorites = favorites.filter(favorite => favorite.id !== id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 };
 
 export const MainContextProvider = () => {
@@ -56,7 +52,6 @@ export const MainContextProvider = () => {
                     activeFilters,
                     setActiveFilters,
                     isFavoriteVacancy,
-                    favoritesStorage,
                     addToFavorite,
                     removeFromFavorite,
                 }
@@ -74,7 +69,6 @@ export const FavoritesContextProvider = () => {
             value={
                 {
                     isFavoriteVacancy,
-                    favoritesStorage,
                 }
             }
         >

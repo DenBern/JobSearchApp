@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { Text, Paper, Title } from "@mantine/core";
 import { useContext, useState } from "react";
 
-import './Vacancy.css';
 import { Context } from "../../Context";
+
+import "./Vacancy.css";
 
 export const Vacancy = (props) => {
     const {
@@ -15,10 +16,7 @@ export const Vacancy = (props) => {
         id,
         town_id,
         type_of_work_id,
-        favorite,
     } = props;
-
-    const {addToFavorite, removeFromFavorite} = useContext(Context);
 
     const favoriteVacancy = {
         profession,
@@ -27,7 +25,21 @@ export const Vacancy = (props) => {
         type_of_work,
         town,
         id,
+        town_id,
+        type_of_work_id,
     };
+
+    const {addToFavorite, removeFromFavorite, isFavoriteVacancy} = useContext(Context);
+    const [favorite, setFavorite] = useState(isFavoriteVacancy(props.id));
+
+    const handleToggleFavorite = () => {
+        if(isFavoriteVacancy(id)) {
+            removeFromFavorite(id);
+        } else {
+            addToFavorite(favoriteVacancy);
+        }
+        setFavorite(!favorite);
+    }
 
     return (
         <>
@@ -71,7 +83,7 @@ export const Vacancy = (props) => {
                 </div>
                 <button 
                     type="button"
-                    onClick={favorite ? removeFromFavorite(id) : addToFavorite(favoriteVacancy)}
+                    onClick={handleToggleFavorite}
                     className={favorite ? "favoriteActive" : "favoriteDisabled"}
                 />
             </Paper>

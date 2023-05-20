@@ -55,6 +55,7 @@ export const Main = () => {
         getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
     }, [page]);
 
+
     return (
         <>
             <Filters
@@ -79,13 +80,17 @@ export const Main = () => {
                             <Skeleton height={8} mt={6} radius="xl" />
                             <Skeleton height={8} mt={6} width="70%" radius="xl" />
                         </> 
-                        : vacancies.map(vacancy =>
+                        : vacancies.map(vacancy => {
+                            return (
                                 <Vacancy
                                     key={vacancy.id}  
                                     {...vacancy}
                                     favorite={isFavoriteVacancy(vacancy.id)}
                                 />
+                            )
+                        }
                         )
+                        
                     }
                 </div>
                 {countVacancies > countPerPage && 

@@ -10,18 +10,14 @@ import "./Favorites.css";
 
 export const Favorites = () => {
 
-  const { isFavoriteVacancy, favoritesStorage } = useContext(Context);
-  const {countPerPage} = SuperJob();
+  const { emptyFavoritesStorage } = useContext(Context);
+  const { countPerPage } = SuperJob();
   const [activePage, setActivePage] = useState(1);
-
-  // const emptyFavorites = favoritesStorage ?? true;
-
-  console.log(favoritesStorage)
 
   const startCountVacancies = (activePage - 1) * countPerPage;
   const endVCountVacancies = startCountVacancies + countPerPage;
 
-  // const onCurrentPageVacancies = emptyFavorites ? [] : favoritesStorage.slice(startCountVacancies, endVCountVacancies);
+  // const onCurrentPageVacancies = emptyFavoritesStorage ? [] : favoritesStorage.slice(startCountVacancies, endVCountVacancies);
 
   // useEffect(() => {
   //   console.log(favoritesStorage.length)

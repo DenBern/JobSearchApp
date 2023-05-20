@@ -25,10 +25,10 @@ export const VacancyDetails = () => {
             <div className="details-wrapper">
               <Vacancy {...vacancyDetails}/>
               <TypographyStylesProvider>
-                <div 
+                {/* <div 
                   dangerouslySetInnerHTML={{ __html: `${vacancyDetails.details}` }} 
                   className="details-all"
-                />
+                /> */}
               </TypographyStylesProvider>
             </div>
           )
