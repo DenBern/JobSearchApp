@@ -9,42 +9,59 @@ import { Pagination } from "@mantine/core";
 import "./Favorites.css";
 
 export const Favorites = () => {
+  
+  const { favoritesStorage } = useContext(Context);
 
-  const { emptyFavoritesStorage } = useContext(Context);
-  const { countPerPage } = SuperJob();
   const [activePage, setActivePage] = useState(1);
-
+  const {countPerPage} = SuperJob();
   const startCountVacancies = (activePage - 1) * countPerPage;
   const endVCountVacancies = startCountVacancies + countPerPage;
 
-  // const onCurrentPageVacancies = emptyFavoritesStorage ? [] : favoritesStorage.slice(startCountVacancies, endVCountVacancies);
+  const favoriteFromStorage = JSON.parse(favoritesStorage) ?? [];
+  
+  const [currentFavoriteVacancies, setcurrentFavoriteVacancies] = useState([...favoriteFromStorage]);
 
-  // useEffect(() => {
-  //   console.log(favoritesStorage.length)
-  // }, [onCurrentPageVacancies.length])
+  // const onCurrentPageVacancies = () => {
+  //   const favoritesStorageString = localStorage.getItem('favorites');
+  //   let favorites = JSON.parse(favoritesStorageString).slice(startCountVacancies, endVCountVacancies);
+  //   setcurrentFavoriteVacancies(favorites);
+  //   localStorage.setItem('favorites', JSON.stringify(favorites));
+  // };
+
+  const removeFavorite = (id) => {
+    const updatedFavorites = favoriteFromStorage.filter(
+      (favorite) => favorite.id !== id
+    );
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setcurrentFavoriteVacancies(
+      updatedFavorites.slice(startCountVacancies, endVCountVacancies)
+    );
+  };
+
+  useEffect(() => {
+    setcurrentFavoriteVacancies(favoriteFromStorage.slice(startCountVacancies, endVCountVacancies))
+  }, [activePage])
 
   return (
     <>
       <div className="wrapper-favorites">
-        {/* <div className="favorites">
-          {emptyFavorites 
-            ? <Empty/> 
-            : (!onCurrentPageVacancies.length && null)
-            ? !emptyFavorites 
-            : onCurrentPageVacancies.map(curVac => {
+        <div className="favorites">
+          {currentFavoriteVacancies.length 
+            ? currentFavoriteVacancies.map(currentFavoriteVacancy => {
               return <Vacancy 
-                      key={curVac.id}
-                      {...curVac}
-                      favorite={isFavoriteVacancy(curVac.id)}
+                        key={currentFavoriteVacancy.id}
+                        {...currentFavoriteVacancy}
+                        onRemove={removeFavorite}
                       />
             })
-            }
+            : <Empty/>
+          }
         </div>
-        {emptyFavorites ? null :
+        {/* {
           <Pagination 
             value={activePage} 
             onChange={activePage => setActivePage(activePage)}
-            // total={Math.ceil(favoritesStorage.length / countPerPage)} 
+            total={Math.ceil(JSON.parse(favoritesStorage).length / countPerPage)} 
           />
         } */}
       </div>

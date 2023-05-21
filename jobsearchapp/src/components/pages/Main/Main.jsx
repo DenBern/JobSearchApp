@@ -85,7 +85,6 @@ export const Main = () => {
                                 <Vacancy
                                     key={vacancy.id}  
                                     {...vacancy}
-                                    favorite={isFavoriteVacancy(vacancy.id)}
                                 />
                             )
                         }

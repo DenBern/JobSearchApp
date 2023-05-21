@@ -5,6 +5,8 @@ import { Favorites } from "./components/pages/Favorites/Favorites";
 
 export const Context = React.createContext();
 
+const favoritesStorage = localStorage.getItem('favorite');
+
 const isFavoriteVacancy = (id) => {
     const favoritesStorageString = localStorage.getItem('favorites');
     const filteredVacancies = (favoritesStorageString === null)  ? [] : JSON.parse(favoritesStorageString).filter(favorite => favorite.id === id);
@@ -12,7 +14,6 @@ const isFavoriteVacancy = (id) => {
 }
 
 const addToFavorite = (favoriteVacancy) => {
-    console.log('active in context')
     const favoritesStorageString = localStorage.getItem('favorites');
     let favorites = [];
 
@@ -25,7 +26,6 @@ const addToFavorite = (favoriteVacancy) => {
 };
 
 const removeFromFavorite = (id) => {
-    console.log('disabled in context')
     const favoritesStorageString = localStorage.getItem('favorites');
     let favorites = JSON.parse(favoritesStorageString);
     favorites = favorites.filter(favorite => favorite.id !== id);
@@ -69,6 +69,8 @@ export const FavoritesContextProvider = () => {
             value={
                 {
                     isFavoriteVacancy,
+                    favoritesStorage,
+                    removeFromFavorite,
                 }
             }
         >

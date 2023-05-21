@@ -16,6 +16,7 @@ export const Vacancy = (props) => {
         id,
         town_id,
         type_of_work_id,
+        removeFavorite,
     } = props;
 
     const favoriteVacancy = {
