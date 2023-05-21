@@ -25,7 +25,7 @@ export const Search = (props) => {
                 {
                     <Button
                         data-elem="search-button"
-                        disabled={!search ? true : false}
+                        // disabled={!search ? true : false}
                         size="xs"
                         onClick={handlesearch}>
                         Поиск

@@ -1,16 +1,16 @@
 import { useEffect, useContext } from "react";
 import { SuperJob } from "../../service/SuperJob";
-import { Select } from "@mantine/core";
-import { NumberInput } from '@mantine/core';
-import { Button } from '@mantine/core';
-
 import { Context } from "../../Context";
+
+import { Select } from "@mantine/core";
+import { NumberInput } from "@mantine/core";
+import { Button } from "@mantine/core";
 
 import './Filters.css';
 
 export const Filters = (props) => {
 
-  const { setPage, setPaginationPage, setSearchParams } = props;
+  const { setPage, setPaginationPage, setSearchParams, setReset } = props;
 
   const {
     catalogValue, 
@@ -54,12 +54,14 @@ export const Filters = (props) => {
     setPage(0);
     setPaginationPage(1);
     setSearchParams(`page=${1}`);
+    setReset(true)
   }
 
   const applyFilters = () => {
     setPaginationPage(1);
     setSearchParams(`page=${1}`);
     setActiveFilters(true);
+    setReset(false);
   }
 
   const isButtonApplyDisabled = catalogValue || paymentFrom || paymentTo;

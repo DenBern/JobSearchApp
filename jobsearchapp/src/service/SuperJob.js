@@ -2,7 +2,9 @@ import { useState } from "react";
 
 export const SuperJob = () => {
 
-    const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
+    // const URL = 'https://startup-summer-2023-proxy.onrender.com/2.0';
+
+    const URL = 'https://startup-summer-proxy-production.up.railway.app/2.0';
     const urlPassword = '/oauth2/password/?';
     const urlVacancies = '/vacancies/?'; 
     const urlCatalogues = '/catalogues/';

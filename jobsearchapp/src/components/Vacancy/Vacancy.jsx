@@ -50,7 +50,9 @@ export const Vacancy = (props) => {
     return (
         <>
             <Paper p="xl">
-                <div className="wrapper-vacancy">
+                <div 
+                    data-elem={`vacancy-${id}`}
+                    className="wrapper-vacancy">
                     {urlDetails 
                     ?   (
                             <Title order={3}>
@@ -60,7 +62,6 @@ export const Vacancy = (props) => {
                     :   (
                             <Title order={4}>
                                 <Link
-                                    data-elem={`vacancy-${id}`}
                                     to={`/${id}`} 
                                     key={id}>
                                         {profession}
@@ -97,7 +98,8 @@ export const Vacancy = (props) => {
                         </Text>
                     </div>
                 </div>
-                <button 
+                <button
+                    data-elem={`vacancy-${id}-shortlist-button`}
                     type="button"
                     onClick={handleToggleFavorite}
                     className={favorite ? "favoriteActive" : "favoriteDisabled"}

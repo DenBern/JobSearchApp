@@ -35,6 +35,7 @@ export const Main = () => {
     const [vacancy, setVacancy] = useState('');
     const [page, setPage] = useState(+searchParams.get('page') - 1 || 0);
     const [paginationPage, setPaginationPage] = useState(+searchParams.get('page') || 1);
+    const [reset, setReset] = useState(false);
 
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit 
@@ -50,15 +51,20 @@ export const Main = () => {
 
     useEffect(() => {
         if (activeFilters) {
+            console.log('filters')
             getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 0, noAgreement);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeFilters]);
 
+    // useEffect(() => {
+    //     getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
+    // // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [page, vacancy]);
+
     useEffect(() => {
         getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, vacancy]);
+    }, [page, vacancy, reset])
 
     const emptySearch = !countVacancies && !loadingVacancy && !errorVacancy;
 
@@ -68,13 +74,15 @@ export const Main = () => {
                 setSearchParams={setSearchParams}
                 setPaginationPage={setPaginationPage}
                 setPage={setPage}
+                setReset={setReset}
             />
             <div className="search-vacancies">
                 <Search 
                     updateVacancy={(search) => {
-                            setVacancy(search)
-                            setPage(0)
-                            setPaginationPage(1)
+                            setVacancy(search);
+                            setPage(0);
+                            setPaginationPage(1);
+                            setReset(false);
                         }
                     }
                     updatePage={setPage}
@@ -107,6 +115,7 @@ export const Main = () => {
                                     setPaginationPage(page);
                                     setPage(page - 1);
                                     setSearchParams(`page=${page}`);
+                                    setReset(false);
                                 }
                             }
                             total={pages}

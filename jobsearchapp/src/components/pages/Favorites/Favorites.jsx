@@ -10,31 +10,38 @@ import "./Favorites.css";
 
 export const Favorites = () => {
   
-  const { favoritesStorage } = useContext(Context);
+  const { favoritesStorage, setFavoritesStorage } = useContext(Context);
 
   const {countPerPage} = SuperJob();
   const [activePage, setActivePage] = useState(1);
   const startCountVacancies = (activePage - 1) * countPerPage;
   const endVCountVacancies = startCountVacancies + countPerPage;
-  const totalPages = Math.ceil(JSON.parse(localStorage.getItem('favorites')).length / countPerPage);
+  const totalPages = Math.ceil(JSON.parse(favoritesStorage).length / countPerPage);
 
-  const [currentFavoriteVacancies, setCurrentFavoriteVacancies] = useState([...JSON.parse(favoritesStorage)] || []);
+  const [currentFavoriteVacancies, setCurrentFavoriteVacancies] = useState(JSON.parse(favoritesStorage) || []);
+
   const removeFromFavorites = (id) => {
-    const updatedFavorites = currentFavoriteVacancies.filter(favorite => favorite.id !== id);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-    setCurrentFavoriteVacancies(updatedFavorites.slice(startCountVacancies, endVCountVacancies))
+    const currentFavoriteVacancies = JSON.parse(favoritesStorage);
+    const deletedItem = currentFavoriteVacancies.findIndex((favorite) => favorite.id === id);
+    currentFavoriteVacancies.splice(deletedItem, 1);
+    setFavoritesStorage(JSON.stringify(currentFavoriteVacancies))
+    setCurrentFavoriteVacancies(currentFavoriteVacancies);
   }
 
   const updatedFavorites = () => {
-    const favoritesString = localStorage.getItem('favorites')
-    const favoritesFromStorage = [...JSON.parse(favoritesString)] || [];
-    setCurrentFavoriteVacancies(favoritesFromStorage.slice(startCountVacancies, endVCountVacancies)
-    );
+    const favoritesFromStorage = JSON.parse(favoritesStorage) || [];
+    const favoritesFromStoragePerPage = favoritesFromStorage.slice(startCountVacancies, endVCountVacancies);
+    if (!favoritesFromStoragePerPage.length) {
+      setActivePage(activePage - 1)
+    }
+    setCurrentFavoriteVacancies(favoritesFromStoragePerPage)
   }
 
   useEffect(() => {
-    updatedFavorites()
-  }, [favoritesStorage]);
+    if (JSON.parse(favoritesStorage).length) {
+      updatedFavorites();
+    }
+  }, [favoritesStorage, activePage]);
 
   return (
     <>
@@ -51,7 +58,7 @@ export const Favorites = () => {
             : <Empty/>
           }
         </div>
-        {JSON.parse(favoritesStorage).length > countPerPage 
+        {JSON.parse(localStorage.getItem('favorites'))?.length > countPerPage 
           ? (
               <Pagination 
                 value={activePage} 
