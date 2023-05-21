@@ -15,7 +15,7 @@ export const App = () => {
                         <Routes>
                             <Route path="*" element={<MainContextProvider/>}/>
                             <Route path="/:id" element={<VacancyDetails/>}/>
-                            <Route path="/favorite" element={<FavoritesContextProvider/>}/>
+                            <Route path="/favorites" element={<FavoritesContextProvider/>}/>
                         </Routes>
                     </main>
             </Router>

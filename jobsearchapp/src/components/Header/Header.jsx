@@ -35,7 +35,7 @@ export const Header = () => {
                     }
                   )
                 } 
-              to={`/favorite`}>
+              to={`/favorites`}>
               Избранное
             </NavLink>
           </div>

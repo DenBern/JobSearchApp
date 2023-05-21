@@ -16,7 +16,7 @@ export const Vacancy = (props) => {
         id,
         town_id,
         type_of_work_id,
-        removeFavorite,
+        onRemove,
     } = props;
 
     const favoriteVacancy = {
@@ -36,6 +36,10 @@ export const Vacancy = (props) => {
     const handleToggleFavorite = () => {
         if(isFavoriteVacancy(id)) {
             removeFromFavorite(id);
+            console.log(window.location.href.includes('favorites'))
+            if (window.location.href.includes('favorites')) {
+                onRemove(id)
+            }
         } else {
             addToFavorite(favoriteVacancy);
         }

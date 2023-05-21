@@ -5,7 +5,7 @@ import { Favorites } from "./components/pages/Favorites/Favorites";
 
 export const Context = React.createContext();
 
-const favoritesStorage = localStorage.getItem('favorite');
+const favoritesStorage = localStorage.getItem('favorites');
 
 const isFavoriteVacancy = (id) => {
     const favoritesStorageString = localStorage.getItem('favorites');
@@ -26,6 +26,7 @@ const addToFavorite = (favoriteVacancy) => {
 };
 
 const removeFromFavorite = (id) => {
+    console.log('remove')
     const favoritesStorageString = localStorage.getItem('favorites');
     let favorites = JSON.parse(favoritesStorageString);
     favorites = favorites.filter(favorite => favorite.id !== id);
