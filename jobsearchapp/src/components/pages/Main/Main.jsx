@@ -4,8 +4,8 @@ import { Search } from "../../Search/Search";
 import { Vacancy } from "../../Vacancy/Vacancy";
 import { Filters } from "../../Filters/Filters";
 import { Context } from "../../../Context";
+import { SkeletonVacancy } from "../../Skeleton/Skeleton";
 
-import { Skeleton } from "@mantine/core";
 import { Pagination } from "@mantine/core";
 import { useSearchParams } from "react-router-dom";
 
@@ -26,7 +26,6 @@ export const Main = () => {
         paymentFrom,
         paymentTo,
         activeFilters,
-        isFavoriteVacancy,
     } = useContext(Context);
 
     let [searchParams, setSearchParams] = useSearchParams();
@@ -43,18 +42,20 @@ export const Main = () => {
 
     useEffect(() => {
         getAccessToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         if (activeFilters) {
             getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 0, noAgreement);
-        } 
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeFilters]);
 
     useEffect(() => {
         getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
-    }, [page]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page, vacancy]);
 
     return (
         <>
@@ -74,12 +75,8 @@ export const Main = () => {
                     updatePage={setPage}
                 />
                 <div className="vacancies">
-                    {loading ? 
-                        <>
-                            <Skeleton height={8} radius="xl" />
-                            <Skeleton height={8} mt={6} radius="xl" />
-                            <Skeleton height={8} mt={6} width="70%" radius="xl" />
-                        </> 
+                    {loading 
+                        ? <SkeletonVacancy/>
                         : vacancies.map(vacancy => {
                             return (
                                 <Vacancy

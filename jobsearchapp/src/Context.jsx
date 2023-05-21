@@ -2,10 +2,9 @@ import React, { useState } from "react";
 
 import { Main } from "./components/pages/Main/Main";
 import { Favorites } from "./components/pages/Favorites/Favorites";
+import { VacancyDetails } from "./components/pages/VacancyDetails/VacancyDetails";
 
 export const Context = React.createContext();
-
-const favoritesStorage = localStorage.getItem('favorites');
 
 const isFavoriteVacancy = (id) => {
     const favoritesStorageString = localStorage.getItem('favorites');
@@ -25,8 +24,7 @@ const addToFavorite = (favoriteVacancy) => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
 };
 
-const removeFromFavorite = (id) => {
-    console.log('remove')
+const deleteFromFavorite = (id) => {
     const favoritesStorageString = localStorage.getItem('favorites');
     let favorites = JSON.parse(favoritesStorageString);
     favorites = favorites.filter(favorite => favorite.id !== id);
@@ -54,7 +52,7 @@ export const MainContextProvider = () => {
                     setActiveFilters,
                     isFavoriteVacancy,
                     addToFavorite,
-                    removeFromFavorite,
+                    deleteFromFavorite,
                 }
             }
         >
@@ -65,18 +63,35 @@ export const MainContextProvider = () => {
 
 export const FavoritesContextProvider = () => {
 
+    const [favoritesStorage, setFavoritesStorage] = useState(localStorage.getItem('favorites'));
+
     return (
         <Context.Provider
             value={
-                {
-                    isFavoriteVacancy,
+                {   isFavoriteVacancy,
                     favoritesStorage,
-                    removeFromFavorite,
+                    deleteFromFavorite,
+                    setFavoritesStorage,
                 }
             }
         >
             {<Favorites/>}
         </Context.Provider>
     ) 
+}
+
+export const VacancyDetailsContextProvider = () => {
+    return (
+        <Context.Provider
+            value={
+                {   
+                    isFavoriteVacancy,
+                    addToFavorite,
+                    deleteFromFavorite,
+                }
+            }>
+        {<VacancyDetails/>}
+        </Context.Provider>
+    )
 }
 

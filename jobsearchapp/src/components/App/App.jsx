@@ -1,8 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { FavoritesContextProvider, MainContextProvider, VacancyDetailsContextProvider } from '../../Context';
 
 import { Header } from '../Header/Header';
-import { VacancyDetails } from '../pages/VacancyDetails/VacancyDetails';
-import { FavoritesContextProvider, MainContextProvider } from '../../Context';
 
 import './App.css';
 
@@ -14,7 +13,7 @@ export const App = () => {
                     <main>
                         <Routes>
                             <Route path="*" element={<MainContextProvider/>}/>
-                            <Route path="/:id" element={<VacancyDetails/>}/>
+                            <Route path="/:id" element={<VacancyDetailsContextProvider/>}/>
                             <Route path="/favorites" element={<FavoritesContextProvider/>}/>
                         </Routes>
                     </main>

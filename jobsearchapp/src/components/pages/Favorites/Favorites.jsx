@@ -12,14 +12,13 @@ export const Favorites = () => {
   
   const { favoritesStorage } = useContext(Context);
 
-  const [activePage, setActivePage] = useState(1);
   const {countPerPage} = SuperJob();
+  const [activePage, setActivePage] = useState(1);
   const startCountVacancies = (activePage - 1) * countPerPage;
   const endVCountVacancies = startCountVacancies + countPerPage;
   const totalPages = Math.ceil(JSON.parse(localStorage.getItem('favorites')).length / countPerPage);
 
   const [currentFavoriteVacancies, setCurrentFavoriteVacancies] = useState([...JSON.parse(favoritesStorage)] || []);
-
   const removeFromFavorites = (id) => {
     const updatedFavorites = currentFavoriteVacancies.filter(favorite => favorite.id !== id);
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
@@ -35,7 +34,7 @@ export const Favorites = () => {
 
   useEffect(() => {
     updatedFavorites()
-  }, [favoritesStorage, startCountVacancies, endVCountVacancies]);
+  }, [favoritesStorage]);
 
   return (
     <>
@@ -52,12 +51,15 @@ export const Favorites = () => {
             : <Empty/>
           }
         </div>
-        {
-          <Pagination 
-            value={activePage} 
-            onChange={activePage => setActivePage(activePage)}
-            total={totalPages} 
-          />
+        {JSON.parse(favoritesStorage).length > countPerPage 
+          ? (
+              <Pagination 
+                value={activePage} 
+                onChange={activePage => setActivePage(activePage)}
+                total={totalPages} 
+              />
+            )
+          : null
         }
       </div>
     </>

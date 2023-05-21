@@ -83,6 +83,7 @@ export const Filters = (props) => {
         <div className="wrapper-industry">
           <p>Отрасль</p>
           <Select
+            data-elem="industry-select"
             data={
               catalogues.map(catalog => {
                 return {
@@ -102,6 +103,7 @@ export const Filters = (props) => {
         <div className="wrapper-salary">
           <p>Оклад</p>
           <NumberInput
+            data-elem="salary-from-input"
             type="number"
             placeholder="От"
             min={0}
@@ -111,6 +113,7 @@ export const Filters = (props) => {
             value={paymentFrom ?? ''}
           />
           <NumberInput
+            data-elem="salary-to-input"
             type="number"
             placeholder="До"
             min={paymentFrom}
@@ -120,9 +123,9 @@ export const Filters = (props) => {
           />
         </div>
         <Button
+          data-elem="search-button"
           disabled={!isButtonApplyDisabled}
-          onClick={applyFilters}
-        >
+          onClick={applyFilters}>
           Применить
         </Button>
       </div>

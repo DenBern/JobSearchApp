@@ -30,13 +30,12 @@ export const Vacancy = (props) => {
         type_of_work_id,
     };
 
-    const {addToFavorite, removeFromFavorite, isFavoriteVacancy} = useContext(Context);
-    const [favorite, setFavorite] = useState(isFavoriteVacancy(props.id));
+    const {addToFavorite, deleteFromFavorite, isFavoriteVacancy} = useContext(Context);
+    const [favorite, setFavorite] = useState(isFavoriteVacancy(id));
 
     const handleToggleFavorite = () => {
         if(isFavoriteVacancy(id)) {
-            removeFromFavorite(id);
-            console.log(window.location.href.includes('favorites'))
+            deleteFromFavorite(id);
             if (window.location.href.includes('favorites')) {
                 onRemove(id)
             }
@@ -46,19 +45,31 @@ export const Vacancy = (props) => {
         setFavorite(!favorite);
     }
 
+    const details = window.location.href.includes(`${id}`);
+
     return (
         <>
             <Paper p="xl">
                 <div className="wrapper-vacancy">
-                    <Title order={4}>
-                        <Link
-                            to={`/${id}`} 
-                            key={id}
-                            >{profession}
-                        </Link>
-                    </Title>
+                    {details 
+                    ?   (
+                            <Title order={3}>
+                                {profession}
+                            </Title> 
+                        )
+                    :   (
+                            <Title order={4}>
+                                <Link
+                                    data-elem={`vacancy-${id}`}
+                                    to={`/${id}`} 
+                                    key={id}>
+                                        {profession}
+                                </Link>
+                            </Title>
+                        )
+                    }
                     <div className="wrapper">
-                        <Text fw={700} size="md">
+                        <Text fw={700} size={details ? "lg" : "md"}>
                             з/п 
                             {
                                 payment_from && payment_to ? 
@@ -73,7 +84,7 @@ export const Vacancy = (props) => {
                         <div className="divider">
                             &bull;
                         </div>
-                        <Text fz="md">
+                        <Text size={details ? "lg" : "md"}>
                             {type_of_work && type_of_work.title}
                             {type_of_work_id && type_of_work_id}
                         </Text>

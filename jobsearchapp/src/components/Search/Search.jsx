@@ -14,6 +14,7 @@ export const Search = (props) => {
 
     return (
         <TextInput
+            data-elem="search-input"
             radius="md"
             type="text"
             placeholder="Введите название вакансии"
@@ -23,6 +24,7 @@ export const Search = (props) => {
             rightSection=
                 {
                     <Button
+                        data-elem="search-button"
                         disabled={!search ? true : false}
                         size="xs"
                         onClick={handlesearch}>
