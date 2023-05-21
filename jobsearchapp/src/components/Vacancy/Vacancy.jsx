@@ -45,13 +45,13 @@ export const Vacancy = (props) => {
         setFavorite(!favorite);
     }
 
-    const details = window.location.href.includes(`${id}`);
+    const urlDetails = window.location.href.includes(`${id}`);
 
     return (
         <>
             <Paper p="xl">
                 <div className="wrapper-vacancy">
-                    {details 
+                    {urlDetails 
                     ?   (
                             <Title order={3}>
                                 {profession}
@@ -69,7 +69,7 @@ export const Vacancy = (props) => {
                         )
                     }
                     <div className="wrapper">
-                        <Text fw={700} size={details ? "lg" : "md"}>
+                        <Text fw={700} size={urlDetails ? "lg" : "md"}>
                             з/п 
                             {
                                 payment_from && payment_to ? 
@@ -84,7 +84,7 @@ export const Vacancy = (props) => {
                         <div className="divider">
                             &bull;
                         </div>
-                        <Text size={details ? "lg" : "md"}>
+                        <Text size={urlDetails ? "lg" : "md"}>
                             {type_of_work && type_of_work.title}
                             {type_of_work_id && type_of_work_id}
                         </Text>

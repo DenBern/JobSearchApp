@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { SuperJob } from "../../../service/SuperJob";
 import { Search } from "../../Search/Search";
 import { Vacancy } from "../../Vacancy/Vacancy";
 import { Filters } from "../../Filters/Filters";
 import { Context } from "../../../Context";
 import { SkeletonVacancy } from "../../Skeleton/Skeleton";
+import { Empty } from "../../Empty/Empty";
+import { Error } from "../../Error/Error";
 
 import { Pagination } from "@mantine/core";
-import { useSearchParams } from "react-router-dom";
 
 import  "./Main.css";
 
@@ -17,8 +19,9 @@ export const Main = () => {
         getVacancies, 
         vacancies,
         countVacancies, 
-        loading,
+        loadingVacancy,
         countPerPage,
+        errorVacancy
     } = SuperJob();
 
     const {
@@ -57,6 +60,8 @@ export const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, vacancy]);
 
+    const emptySearch = !countVacancies && !loadingVacancy && !errorVacancy;
+
     return (
         <>
             <Filters
@@ -74,21 +79,25 @@ export const Main = () => {
                     }
                     updatePage={setPage}
                 />
-                <div className="vacancies">
-                    {loading 
-                        ? <SkeletonVacancy/>
-                        : vacancies.map(vacancy => {
-                            return (
-                                <Vacancy
-                                    key={vacancy.id}  
-                                    {...vacancy}
-                                />
-                            )
-                        }
-                        )
-                        
-                    }
-                </div>
+                {emptySearch ? <Empty/> : null}
+                {errorVacancy ? <Error/> :
+                    (
+                        <div className="vacancies">
+                            {loadingVacancy
+                                ? <SkeletonVacancy/>
+                                : vacancies.map(vacancy => {
+                                        return (
+                                            <Vacancy
+                                                key={vacancy.id}  
+                                                {...vacancy}
+                                            />
+                                        )
+                                    }
+                                )
+                            }
+                        </div>
+                    )
+                }
                 {countVacancies > countPerPage && 
                     (
                         <Pagination 

@@ -2,15 +2,15 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { SuperJob } from "../../../service/SuperJob";
 import { Vacancy } from "../../Vacancy/Vacancy";
-import { SkeletonVacancy } from "../../Skeleton/Skeleton";
+import { Error } from "../../Error/Error";
 
-import { TypographyStylesProvider } from "@mantine/core";
+import { Loader, TypographyStylesProvider } from "@mantine/core";
 
 import './VacancyDetails.css';
 
 export const VacancyDetails = () => {
 
-  const {getVacancyDetails, vacancyDetails, loadVacancy} = SuperJob();
+  const {getVacancyDetails, vacancyDetails, loadingVacancyDetails, errorVacancyDetails} = SuperJob();
   const {id} = useParams();
   // const {addToFavorite, deleteFromFavorite} = useContext(Context);
 
@@ -20,19 +20,20 @@ export const VacancyDetails = () => {
 
   return (
     <>
-      {loadVacancy 
-        ? <SkeletonVacancy/>
-        : (
-            <div className="details-wrapper">
-              <Vacancy {...vacancyDetails}/>
-              <TypographyStylesProvider>
-                <div 
-                  dangerouslySetInnerHTML={{ __html: `${vacancyDetails.details}` }} 
-                  className="details-all"
-                />
-              </TypographyStylesProvider>
-            </div>
-          )
+      {loadingVacancyDetails 
+        ? <Loader variant="dots" size="xl"/>
+        : errorVacancyDetails ? <Error/>
+          :(
+              <div className="details-wrapper">
+                <Vacancy {...vacancyDetails}/>
+                <TypographyStylesProvider>
+                  <div 
+                    dangerouslySetInnerHTML={{ __html: `${vacancyDetails.details}` }} 
+                    className="details-all"
+                  />
+                </TypographyStylesProvider>
+              </div>
+            )
       }
     </>
   )
