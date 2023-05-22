@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/JobSearchApp/static/css/main.acfa1d03.css",
+    "main.js": "/JobSearchApp/static/js/main.a542faf1.js",
+    "static/media/error.svg": "/JobSearchApp/static/media/error.70601b113c09b6da5771.svg",
+    "static/media/notFound.png": "/JobSearchApp/static/media/notFound.e4a66671772993622153.png",
+    "index.html": "/JobSearchApp/index.html",
+    "static/media/searchIcon.svg": "/JobSearchApp/static/media/searchIcon.06548291525b262aaf6b.svg",
+    "main.acfa1d03.css.map": "/JobSearchApp/static/css/main.acfa1d03.css.map",
+    "main.a542faf1.js.map": "/JobSearchApp/static/js/main.a542faf1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.acfa1d03.css",
+    "static/js/main.a542faf1.js"
+  ]
+}
