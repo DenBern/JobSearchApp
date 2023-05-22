@@ -39,3 +39,42 @@ h1 {
   flex-direction: row;
   gap: 3.75rem;
 }
+
+/*Adaptive*/
+
+@media(min-width: 768px) and (max-width: 1180px) {
+  .container {
+    max-width: 1180px;
+    justify-content: center;
+  }
+}
+
+@media(min-width: 480px) and (max-width: 767px) {
+  .container {
+    width: 100%;
+    gap: 50px;
+    justify-content: center;
+  }
+}
+
+@media(min-width: 320px) and (max-width: 479px) {
+  .container {
+    width: 100%;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  .links {
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .header {
+    padding: 12px 0 12px 0;
+  }
+}
+

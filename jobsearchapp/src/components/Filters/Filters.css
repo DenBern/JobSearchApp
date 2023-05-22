@@ -135,3 +135,21 @@ h3 {
   border-radius: 0.5rem;
 }
 
+/*Adaptive*/
+
+@media(min-width: 768px) and (max-width: 1180px) {
+  .filters {
+    max-width: 15rem;
+  }
+
+  .title-filters {
+    gap: 10px;
+  }
+}
+
+@media(min-width: 320px) and (max-width: 767px) {
+  .filters {
+    display: none;
+  }
+}
+
