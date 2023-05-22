@@ -10,9 +10,13 @@ import './VacancyDetails.css';
 
 export const VacancyDetails = () => {
 
-  const {getVacancyDetails, vacancyDetails, loadingVacancyDetails, errorVacancyDetails} = SuperJob();
+  const {
+    getVacancyDetails, 
+    vacancyDetails, 
+    loadingVacancyDetails, 
+    errorVacancyDetails} = SuperJob();
+    
   const {id} = useParams();
-  // const {addToFavorite, deleteFromFavorite} = useContext(Context);
 
   useEffect(() => {
     getVacancyDetails(id);

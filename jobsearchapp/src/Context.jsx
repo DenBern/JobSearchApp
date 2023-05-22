@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { Main } from "./components/pages/Main/Main";
 import { Favorites } from "./components/pages/Favorites/Favorites";
 import { VacancyDetails } from "./components/pages/VacancyDetails/VacancyDetails";
+import { Empty } from "./components/Empty/Empty";
 
 export const Context = React.createContext();
 
 const isFavoriteVacancy = (id) => {
     const favoritesStorageString = localStorage.getItem('favorites');
-    const filteredVacancies = (favoritesStorageString === null)  ? [] : JSON.parse(favoritesStorageString).filter(favorite => favorite.id === id);
+    const filteredVacancies = favoritesStorageString === null  
+        ? [] 
+        : JSON.parse(favoritesStorageString).filter(favorite => favorite.id === id);
     return filteredVacancies.length >= 1;
 }
 
@@ -62,7 +65,6 @@ export const MainContextProvider = () => {
 }
 
 export const FavoritesContextProvider = () => {
-
     const [favoritesStorage, setFavoritesStorage] = useState(localStorage.getItem('favorites'));
 
     return (
@@ -75,7 +77,7 @@ export const FavoritesContextProvider = () => {
                 }
             }
         >
-            {<Favorites/>}
+            {!JSON.parse(localStorage.getItem('favorites')) ? <Empty/> : <Favorites/>}
         </Context.Provider>
     ) 
 }

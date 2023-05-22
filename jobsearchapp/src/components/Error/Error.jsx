@@ -1,4 +1,5 @@
 import { Title } from "@mantine/core";
+import { NavLink } from "react-router-dom";
 import "./Error.css";
 
 export const Error = () => {
@@ -8,6 +9,11 @@ export const Error = () => {
         Произошла ошибка при получении данных
       </Title>
       <div className="error-image"/>
+      <NavLink 
+        className="to-main" 
+        to="/">
+        Поиск Вакансий
+      </NavLink>
     </div>
   )
 }

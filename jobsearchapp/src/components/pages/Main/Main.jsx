@@ -51,16 +51,10 @@ export const Main = () => {
 
     useEffect(() => {
         if (activeFilters) {
-            console.log('filters')
             getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 0, noAgreement);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeFilters]);
-
-    // useEffect(() => {
-    //     getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [page, vacancy]);
 
     useEffect(() => {
         getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);

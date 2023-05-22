@@ -3,6 +3,7 @@ import { Vacancy } from "../../Vacancy/Vacancy";
 import { Empty } from "../../Empty/Empty";
 import { SuperJob } from "../../../service/SuperJob";
 import { Context } from "../../../Context";
+import { Error } from "../../Error/Error";
 
 import { Pagination } from "@mantine/core";
 
@@ -18,7 +19,7 @@ export const Favorites = () => {
   const endVCountVacancies = startCountVacancies + countPerPage;
   const totalPages = Math.ceil(JSON.parse(favoritesStorage).length / countPerPage);
 
-  const [currentFavoriteVacancies, setCurrentFavoriteVacancies] = useState(JSON.parse(favoritesStorage) || []);
+  const [currentFavoriteVacancies, setCurrentFavoriteVacancies] = useState(JSON.parse(favoritesStorage) ?? []);
 
   const removeFromFavorites = (id) => {
     const currentFavoriteVacancies = JSON.parse(favoritesStorage);
@@ -44,31 +45,32 @@ export const Favorites = () => {
   }, [favoritesStorage, activePage]);
 
   return (
-    <>
-      <div className="wrapper-favorites">
-        <div className="favorites">
-          {currentFavoriteVacancies.length 
-            ? currentFavoriteVacancies.map(currentFavoriteVacancy => {
-              return <Vacancy 
-                        key={currentFavoriteVacancy.id}
-                        {...currentFavoriteVacancy}
-                        onRemove={removeFromFavorites}
-                      />
-            })
-            : <Empty/>
+    (localStorage.getItem('favorites') === null) ? <Error/> : 
+      <>
+        <div className="wrapper-favorites">
+          <div className="favorites">
+            {currentFavoriteVacancies.length 
+              ? currentFavoriteVacancies.map(currentFavoriteVacancy => {
+                return <Vacancy 
+                          key={currentFavoriteVacancy.id}
+                          {...currentFavoriteVacancy}
+                          onRemove={removeFromFavorites}
+                        />
+              })
+              : <Empty/>
+            }
+          </div>
+          {JSON.parse(localStorage.getItem('favorites'))?.length > countPerPage 
+            ? (
+                <Pagination 
+                  value={activePage} 
+                  onChange={activePage => setActivePage(activePage)}
+                  total={totalPages} 
+                />
+              )
+            : null
           }
         </div>
-        {JSON.parse(localStorage.getItem('favorites'))?.length > countPerPage 
-          ? (
-              <Pagination 
-                value={activePage} 
-                onChange={activePage => setActivePage(activePage)}
-                total={totalPages} 
-              />
-            )
-          : null
-        }
-      </div>
-    </>
+      </>
   )
 }

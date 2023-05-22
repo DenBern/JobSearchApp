@@ -9,14 +9,19 @@ export const Empty = () => {
       <div className="empty-image"/>
       <Text 
         fz="1.5rem" 
-        fw={700}
-        >Упс, здесь еще ничего нет!
+        fw={700}>
+        Упс, здесь еще ничего нет!
       </Text>
-      <NavLink 
-        className="to-main" 
-        to="/">
-        Поиск Вакансий
-      </NavLink>
+      {window.location.href.includes('favorites') 
+        ? (
+            <NavLink 
+              className="to-main" 
+              to="/">
+              Поиск Вакансий
+            </NavLink>
+          )
+        : null
+      }
     </div>
   )
 }

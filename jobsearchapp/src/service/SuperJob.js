@@ -107,12 +107,10 @@ export const SuperJob = () => {
             setLoadingVacancyDetails(false);
         })
         .catch(() => {
-                console.log(errorVacancyDetails)
                 setErrorVacancyDetails(true)
                 setLoadingVacancyDetails(false)
             }
         )
-        
     }
 
     const getCatalogues = async () => {
