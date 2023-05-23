@@ -26,6 +26,8 @@
 }
 
 .filters {
+  display: flex;
+  flex-direction: column;
   width: 315px;
   background-color: #fff;
   border-radius: 12px;
@@ -147,9 +149,22 @@ h3 {
   }
 }
 
-@media(min-width: 320px) and (max-width: 767px) {
+@media(min-width: 480px) and (max-width: 767px) {
+  .wrapper-filters {
+    max-width: 315px;
+  }
   .filters {
-    display: none;
+    flex-direction: column;
+  }
+}
+
+@media(min-width: 320px) and (max-width: 479px) {
+  .wrapper-filters {
+    max-width: 315px;;
+  }
+  .filters {
+    display: flex;
+    flex-direction: column;
   }
 }
 

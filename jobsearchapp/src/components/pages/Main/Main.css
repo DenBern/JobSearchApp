@@ -55,7 +55,7 @@ a {
 
 @media(min-width: 480px) and (max-width: 767px) {
   .search-vacancies {
-    max-width: 40rem;
+    max-width: 28rem;
   }
 }
 
@@ -72,7 +72,6 @@ a {
 
   .mantine-13v5ff3 {
     padding-top: 1rem;
-
   }
 }
 

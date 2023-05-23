@@ -48,6 +48,9 @@
 }
 
 @media(min-width: 320px) and (max-width: 479px) {
+  .wrapper-favorites {
+    align-items: center;
+  }
   .favorites {
     max-width: 18rem;
   }
