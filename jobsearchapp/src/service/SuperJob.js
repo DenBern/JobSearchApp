@@ -20,6 +20,8 @@ export const SuperJob = () => {
     const [errorVacancy, setErrorVacancy] = useState(false);
     const [loadingVacancyDetails, setLoadingVacancyDetails] = useState(false);
     const [errorVacancyDetails, setErrorVacancyDetails] = useState(false);
+
+    const [acessToken, setAcessToken] = useState(sessionStorage.getItem('token'));
     
     // const tokenSave = 'v3.r.137440105.88868155de00f085b669ba7944421ce8dede25db.a69ca8815874fc60c757223804ec907ded5a821e';
     const credits = {
@@ -39,45 +41,53 @@ export const SuperJob = () => {
     };
 
     const getAccessToken = async () => {
-        const token = 
-            await getData(`${URL}${urlPassword}${credits.login}&${credits.password}&${credits.client_id}&${credits.client_secret}&${credits.hr}`, 
-                {
-                    headers: {
-                        'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-                        'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-                    }
+        await getData(`${URL}${urlPassword}${credits.login}&${credits.password}&${credits.client_id}&${credits.client_secret}&${credits.hr}`, 
+            {
+                headers: {
+                    'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
+                    'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
                 }
-            );
-        sessionStorage.setItem('token', `${token.access_token}`);
+            }
+        )
+        .then(token => {
+            if (token.access_token) {
+                setAcessToken(token.access_token);
+                sessionStorage.setItem('token', `${token.access_token}`);
+            }
+        })
     };
 
     const getVacancies = async (keyword = '', paymentFrom = undefined, paymentTo = undefined, catalogues = [], page, noAgreement) => {
         setLoadingVacancy(true);
-        await getData(`${URL}${urlVacancies}keyword=${keyword}
-            &payment_from=${paymentFrom}
-            &payment_to=${paymentTo}
-            ${noAgreement && `&no_agreement=${noAgreement}`}
-            &catalogues=${catalogues}
-            &published=1
-            &count=${countPerPage}
-            &page=${page}`,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
-                        'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-                        'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+        console.log(acessToken)
+        if (!acessToken) {
+            await getAccessToken()
+            await getData(`${URL}${urlVacancies}keyword=${keyword}
+                &payment_from=${paymentFrom}
+                &payment_to=${paymentTo}
+                ${noAgreement && `&no_agreement=${noAgreement}`}
+                &catalogues=${catalogues}
+                &published=1
+                &count=${countPerPage}
+                &page=${page}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${acessToken}`,
+                            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+                            'X-Api-App-Id': 'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'
+                        }
                     }
-                }
-        )
-        .then(vacancies => {
-            setVacancies([...vacancies.objects]);
-            setCountVacancies(vacancies.total);
-            setLoadingVacancy(false);
-        })
-        .catch(() => {
-            setErrorVacancy(true)
-            setLoadingVacancy(false)
-        })
+            )
+            .then(vacancies => {
+                setVacancies([...vacancies.objects]);
+                setCountVacancies(vacancies.total);
+                setLoadingVacancy(false);
+            })
+            .catch(() => {
+                setErrorVacancy(true)
+                setLoadingVacancy(false)
+            })
+        }
     }
 
     const getVacancyDetails = async (id) => {

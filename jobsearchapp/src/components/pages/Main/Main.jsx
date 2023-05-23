@@ -22,6 +22,7 @@ export const Main = () => {
         loadingVacancy,
         countPerPage,
         errorVacancy,
+        acessToken,
     } = SuperJob();
 
     const {
@@ -46,7 +47,13 @@ export const Main = () => {
 
     useEffect(() => {
         getAccessToken();
-    }, []);
+    }, [])
+    
+    // useEffect(() => {
+    //     if (!acessToken) {
+    //         setAcessToken(sessionStorage.getItem('token') || '');
+    //     }
+    // }, [acessToken])
 
     useEffect(() => {
         if (activeFilters) {
@@ -55,7 +62,7 @@ export const Main = () => {
     }, [activeFilters]);
 
     useEffect(() => {
-        getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
+            getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
     }, [page, vacancy, reset]);
 
     const emptySearch = !countVacancies && !loadingVacancy && !errorVacancy;
