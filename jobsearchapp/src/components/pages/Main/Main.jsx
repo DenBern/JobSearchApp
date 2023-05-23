@@ -22,7 +22,6 @@ export const Main = () => {
         loadingVacancy,
         countPerPage,
         errorVacancy,
-        acessToken,
     } = SuperJob();
 
     const {
@@ -37,6 +36,7 @@ export const Main = () => {
     const [page, setPage] = useState(+searchParams.get('page') - 1 || 0);
     const [paginationPage, setPaginationPage] = useState(+searchParams.get('page') || 1);
     const [reset, setReset] = useState(false);
+    const [accessToken, setAccessToken] = useState(sessionStorage.getItem('token'));
 
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit 
@@ -46,24 +46,19 @@ export const Main = () => {
     const noAgreement = activeFilters ? 1 : null;
 
     useEffect(() => {
-        getAccessToken();
+        getAccessToken().then(token => setAccessToken(token));
+        console.log(accessToken)
     }, [])
     
-    // useEffect(() => {
-    //     if (!acessToken) {
-    //         setAcessToken(sessionStorage.getItem('token') || '');
-    //     }
-    // }, [acessToken])
-
     useEffect(() => {
-        if (activeFilters) {
+        if (activeFilters && accessToken) {
             getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 0, noAgreement);
         }
-    }, [activeFilters]);
+    }, [activeFilters, accessToken]);
 
     useEffect(() => {
-            getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
-    }, [page, vacancy, reset]);
+        accessToken && getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
+    }, [page, vacancy, reset, accessToken]);
 
     const emptySearch = !countVacancies && !loadingVacancy && !errorVacancy;
 
