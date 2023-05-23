@@ -9,7 +9,7 @@ import { SkeletonVacancy } from "../../Skeleton/Skeleton";
 import { Empty } from "../../Empty/Empty";
 import { Error } from "../../Error/Error";
 
-import { Pagination, Button } from "@mantine/core";
+import { Pagination } from "@mantine/core";
 
 import  "./Main.css";
 
@@ -37,8 +37,6 @@ export const Main = () => {
     const [paginationPage, setPaginationPage] = useState(+searchParams.get('page') || 1);
     const [reset, setReset] = useState(false);
 
-    console.log(window.screen.width)
-
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit 
         ? Math.ceil(countVacancies / countPerPage) 
@@ -64,12 +62,12 @@ export const Main = () => {
 
     return (
         <>
-                <Filters
-                    setSearchParams={setSearchParams}
-                    setPaginationPage={setPaginationPage}
-                    setPage={setPage}
-                    setReset={setReset}
-                />
+            <Filters
+                setSearchParams={setSearchParams}
+                setPaginationPage={setPaginationPage}
+                setPage={setPage}
+                setReset={setReset}
+            />
             <div className="search-vacancies">
                 <Search 
                     updateVacancy={(search) => {
@@ -82,23 +80,24 @@ export const Main = () => {
                     updatePage={setPage}
                 />
                 {emptySearch ? <Empty/> : null}
-                {errorVacancy ? <Error/> :
-                    (
-                        <div className="vacancies">
-                            {loadingVacancy
-                                ? <SkeletonVacancy/>
-                                : vacancies.map(vacancy => {
-                                        return (
-                                            <Vacancy
-                                                key={vacancy.id}  
-                                                {...vacancy}
-                                            />
-                                        )
-                                    }
-                                )
-                            }
-                        </div>
-                    )
+                {errorVacancy 
+                    ? <Error/> 
+                    :   (
+                            <div className="vacancies">
+                                {loadingVacancy
+                                    ? <SkeletonVacancy/>
+                                    : vacancies.map(vacancy => {
+                                            return (
+                                                <Vacancy
+                                                    key={vacancy.id}  
+                                                    {...vacancy}
+                                                />
+                                            )
+                                        }
+                                    )
+                                }
+                            </div>
+                        )
                 }
                 {countVacancies  > countPerPage && 
                     (
