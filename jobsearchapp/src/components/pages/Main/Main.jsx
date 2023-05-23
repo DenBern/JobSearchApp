@@ -81,12 +81,11 @@ export const Main = () => {
                     }
                     updatePage={setPage}
                 />
-                {emptySearch ? <Empty/> : null}
                 {errorVacancy 
                     ? <Error/> 
                     :   (
                             <div className="vacancies">
-                                {loadingVacancy
+                                {loadingVacancy || !accessToken
                                     ? <SkeletonVacancy/>
                                     : vacancies.map(vacancy => {
                                             return (
@@ -101,6 +100,7 @@ export const Main = () => {
                             </div>
                         )
                 }
+                {emptySearch ? <Empty/> : null}
                 {countVacancies  > countPerPage && 
                     (
                         <Pagination 
