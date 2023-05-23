@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Context } from "../../Context";
 

@@ -26,7 +26,7 @@ export const VacancyDetails = () => {
     <>
       {loadingVacancyDetails 
         ? <Loader variant="dots" size="xl"/>
-        : errorVacancyDetails ? <Error/>
+        : errorVacancyDetails ? <Error id={id}/>
           :(
               <div className="details-wrapper">
                 <Vacancy {...vacancyDetails}/>

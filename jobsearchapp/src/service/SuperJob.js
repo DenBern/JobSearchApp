@@ -39,7 +39,6 @@ export const SuperJob = () => {
     };
 
     const getAccessToken = async () => {
-        if (sessionStorage.getItem('token')) return;
         const token = 
             await getData(`${URL}${urlPassword}${credits.login}&${credits.password}&${credits.client_id}&${credits.client_secret}&${credits.hr}`, 
                 {

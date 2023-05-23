@@ -9,7 +9,7 @@ import { SkeletonVacancy } from "../../Skeleton/Skeleton";
 import { Empty } from "../../Empty/Empty";
 import { Error } from "../../Error/Error";
 
-import { Pagination } from "@mantine/core";
+import { Pagination, Button } from "@mantine/core";
 
 import  "./Main.css";
 
@@ -21,7 +21,7 @@ export const Main = () => {
         countVacancies, 
         loadingVacancy,
         countPerPage,
-        errorVacancy
+        errorVacancy,
     } = SuperJob();
 
     const {
@@ -37,6 +37,8 @@ export const Main = () => {
     const [paginationPage, setPaginationPage] = useState(+searchParams.get('page') || 1);
     const [reset, setReset] = useState(false);
 
+    console.log(window.screen.width)
+
     const maxAPILimit = 500;
     const pages = countVacancies <= maxAPILimit 
         ? Math.ceil(countVacancies / countPerPage) 
@@ -46,30 +48,28 @@ export const Main = () => {
 
     useEffect(() => {
         getAccessToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         if (activeFilters) {
             getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, 0, noAgreement);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeFilters]);
 
     useEffect(() => {
         getVacancies(vacancy, paymentFrom, paymentTo, catalogValue, page, noAgreement);
-    }, [page, vacancy, reset])
+    }, [page, vacancy, reset]);
 
     const emptySearch = !countVacancies && !loadingVacancy && !errorVacancy;
 
     return (
         <>
-            <Filters
-                setSearchParams={setSearchParams}
-                setPaginationPage={setPaginationPage}
-                setPage={setPage}
-                setReset={setReset}
-            />
+                <Filters
+                    setSearchParams={setSearchParams}
+                    setPaginationPage={setPaginationPage}
+                    setPage={setPage}
+                    setReset={setReset}
+                />
             <div className="search-vacancies">
                 <Search 
                     updateVacancy={(search) => {
@@ -100,7 +100,7 @@ export const Main = () => {
                         </div>
                     )
                 }
-                {countVacancies > countPerPage && 
+                {countVacancies  > countPerPage && 
                     (
                         <Pagination 
                             defaultValue={paginationPage}

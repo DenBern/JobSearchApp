@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TextInput, Button } from '@mantine/core';
 
 import './Search.css';
+import { SuperJob } from '../../service/SuperJob';
 
 export const Search = (props) => {
 
@@ -25,9 +26,11 @@ export const Search = (props) => {
                 {
                     <Button
                         data-elem="search-button"
-                        // disabled={!search ? true : false}
                         size="xs"
-                        onClick={handlesearch}>
+                        onClick={() => {
+                            handlesearch();
+                            }
+                        }>
                         Поиск
                     </Button>
                 }
