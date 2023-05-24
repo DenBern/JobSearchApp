@@ -80,7 +80,7 @@ export const Main = () => {
                     }
                     updatePage={setPage}
                 />
-                {errorVacancy 
+                {errorVacancy
                     ? <Error/> 
                     :   (
                             <div className="vacancies">
@@ -99,7 +99,7 @@ export const Main = () => {
                             </div>
                         )
                 }
-                {emptySearch ? <Empty/> : null}
+                {emptySearch && <Empty/>}
                 {countVacancies  > countPerPage && 
                     (
                         <Pagination 
