@@ -1,10 +1,11 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { SuperJob } from "../../service/SuperJob";
 import { Context } from "../../Context";
 
 import { Select } from "@mantine/core";
 import { NumberInput } from "@mantine/core";
 import { Button } from "@mantine/core";
+import { IconChevronDown } from "@tabler/icons-react";
 
 import './Filters.css';
 
@@ -100,6 +101,8 @@ export const Filters = (props) => {
             limit={2}
             value={catalogValue} 
             onChange={(value) => changeFilter(value, 'catalog')}
+            rightSection={<IconChevronDown size="1rem"/>}
+            styles={{ rightSection: { pointerEvents: 'none', color: '#5E96FC'} }}
           />
         </div>
         <div className="wrapper-salary">
@@ -118,7 +121,7 @@ export const Filters = (props) => {
             data-elem="salary-to-input"
             type="number"
             placeholder="До"
-            min={paymentFrom}
+            min={0}
             onChange={(value) => changeFilter(value, 'to')}
             step={1000}
             value={paymentTo ?? ''}

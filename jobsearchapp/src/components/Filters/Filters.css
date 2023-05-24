@@ -137,6 +137,18 @@ h3 {
   border-radius: 0.5rem;
 }
 
+.mantine-10ej2f4 {
+  color: #ACADB9;
+}
+
+/* .mantine-x0i9fi:disabled {
+  color: #5E96FC;
+}
+
+.mantine-x0i9fi {
+  color: #ced4da;
+} */
+
 /*Adaptive*/
 
 @media(min-width: 768px) and (max-width: 1180px) {

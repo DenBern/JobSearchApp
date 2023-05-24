@@ -47,8 +47,7 @@ export const Main = () => {
 
     useEffect(() => {
         getAccessToken().then(token => setAccessToken(token));
-        console.log(accessToken)
-    }, [])
+    }, []);
     
     useEffect(() => {
         if (activeFilters && accessToken) {
