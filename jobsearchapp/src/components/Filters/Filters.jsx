@@ -121,7 +121,7 @@ export const Filters = (props) => {
             data-elem="salary-to-input"
             type="number"
             placeholder="До"
-            min={0}
+            min={paymentFrom}
             onChange={(value) => changeFilter(value, 'to')}
             step={1000}
             value={paymentTo ?? ''}
